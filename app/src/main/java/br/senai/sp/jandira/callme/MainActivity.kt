@@ -12,9 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.senai.jandira.sp.callme.telas.landingPage
+import br.senai.sp.jandira.callme.screens.redefinirsenha
+import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
-
-
 
 
 class MainActivity : ComponentActivity() {
@@ -33,6 +33,8 @@ class MainActivity : ComponentActivity() {
                         startDestination = "landingpage"
                     ){
                         composable(route = "landingpage") {landingPage(controleNavegacao)}
+                        composable(route = "telacadastro") { telaCadastro(controleNavegacao)}
+                        composable(route = "redefinirsenha") { redefinirsenha(controleNavegacao) }
 
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }

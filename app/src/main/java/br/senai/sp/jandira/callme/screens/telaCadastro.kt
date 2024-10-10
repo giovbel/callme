@@ -1,4 +1,4 @@
-package br.senai.jandira.sp.callme.telas
+package br.senai.sp.jandira.callme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -42,191 +42,188 @@ import br.senai.sp.jandira.callme.R
 
 
 @Composable
-fun landingPageCadastro(controleNavegacao: NavHostController) {
-        var emailState = remember {
-            mutableStateOf("")
-        }
-        var senhaState = remember {
-            mutableStateOf("")
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFFE3EFFF),
-                            Color(0xFF275BC8)
+fun telaCadastro(controleNavegacao: NavHostController) {
+    var emailState = remember {
+        mutableStateOf("")
+    }
+    var senhaState = remember {
+        mutableStateOf("")
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFE3EFFF),
+                        Color(0xFF275BC8)
 
-                        ),
-                    )
+                    ),
                 )
-        ) {
-           
+            )
+    ) {
+
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(10.dp, 10.dp, 10.dp, 60.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        )
+        {
+
             Column(
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .padding(10.dp, 10.dp, 10.dp, 60.dp),
-                verticalArrangement = Arrangement.SpaceBetween
-            )
-            {
+                    .fillMaxWidth()
 
-                Column (
+            ) {
+
+                Image(
+                    painter = painterResource(id = R.drawable.logo),
+                    contentDescription = "",
                     modifier = Modifier
                         .fillMaxWidth()
-
+                        .height(93.dp)
+                        .padding(top = 23.dp),
+                    alignment = Alignment.Center
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(93.dp)
-                            .padding(top = 23.dp),
-                        alignment = Alignment.Center
+                    Text(
+                        textAlign = TextAlign.Center,
+                        text = "Seja bem vindo ao Callme!\nFaça seu login!",
+                        fontSize = 22.sp,
+                        color = Color(0xFF04276D),
+                        fontWeight = FontWeight.Medium
                     )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(
-                            textAlign = TextAlign.Center,
-                            text = "Seja bem vindo ao Callme!\nFaça seu login!",
-                            fontSize = 22.sp,
-                            color = Color(0xFF04276D),
-                            fontWeight = FontWeight.Medium
-                        )
 
-                    }
-                    Spacer(modifier = Modifier.height(50.dp))
-                    Image(
-                        painter = painterResource(id = R.drawable.macallmesonhando),
-                        contentDescription = "",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(170.dp)
-                            .padding(top = 16.dp),
-                        alignment = Alignment.Center
-                    )
-                    Spacer(modifier = Modifier.height(40.dp))
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .padding(horizontal = 24.dp),
-                        shape = RoundedCornerShape(32.dp)
-                    ) {
-                        Row {
-                            Column(
-                                verticalArrangement = Arrangement.Center,
-                                modifier = Modifier
-                                    .width(120.dp)
-                                    .height(600.dp)
-                                    .background(
-                                        color = Color(0xFF2755B2),
-                                        shape = RoundedCornerShape(
-                                            bottomEnd = 32.dp,
-                                            bottomStart = 32.dp,
-                                            topStart = 32.dp
-                                        )
-
-                                    )
-                            ) {
-                                Text(
-                                    textAlign = TextAlign.Center,
-                                    text = "E-mail",
-                                    fontSize = 17.sp,
-                                    color = Color(0xFFFFFFFF),
-                                    fontWeight = FontWeight.Medium,
-                                    modifier = Modifier.padding(start = 20.dp)
-                                )
-                            }
-
-                            OutlinedTextField(
-                                value = emailState.value,
-                                onValueChange = { emailState.value = it },
-                                colors = OutlinedTextFieldDefaults.colors(
-                                    unfocusedBorderColor = Color.Transparent,
-                                    focusedBorderColor = Color.Transparent
-                                )
-                            )
-                        }
-
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .padding(horizontal = 24.dp),
-                        shape = RoundedCornerShape(32.dp)
-                    ) {
-                        Row {
-                            Column(
-                                verticalArrangement = Arrangement.Center,
-                                modifier = Modifier
-                                    .width(120.dp)
-                                    .height(600.dp)
-                                    .background(
-                                        color = Color(0xFF2755B2),
-                                        shape = RoundedCornerShape(
-                                            bottomEnd = 32.dp,
-                                            bottomStart = 32.dp,
-                                            topStart = 32.dp
-                                        )
-
-                                    )
-                            ) {
-                                Text(
-                                    textAlign = TextAlign.Center,
-                                    text = "Senha",
-                                    fontSize = 17.sp,
-                                    color = Color(0xFFFFFFFF),
-                                    fontWeight = FontWeight.Medium,
-                                    modifier = Modifier.padding(start = 20.dp)
-                                )
-                            }
-                            OutlinedTextField(
-                                value = senhaState.value, onValueChange = { senhaState.value = it },
-                                colors = OutlinedTextFieldDefaults.colors(
-                                    unfocusedBorderColor = Color.Transparent,
-                                    focusedBorderColor = Color.Transparent
-                                )
-                            )
-                        }
-
-                    }
-
-                    Button(
-                        onClick = { /*TODO*/ },
-                        colors = ButtonDefaults
-                            .buttonColors(
-                                containerColor = Color.Transparent
-                            ),
-                        modifier = Modifier,
-                    ) {
-                        Text(
-                            text = "Esqueci minha senha",
-                            color = Color(0xFF213787),
-                            fontWeight = FontWeight.Bold,
-
+                }
+                Spacer(modifier = Modifier.height(50.dp))
+                Image(
+                    painter = painterResource(id = R.drawable.macallmesonhando),
+                    contentDescription = "",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(170.dp)
+                        .padding(top = 16.dp),
+                    alignment = Alignment.Center
+                )
+                Spacer(modifier = Modifier.height(40.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                        .padding(horizontal = 24.dp),
+                    shape = RoundedCornerShape(32.dp)
+                ) {
+                    Row {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
                             modifier = Modifier
-                                .padding(12.dp)
-                                .clickable {
+                                .width(120.dp)
+                                .height(600.dp)
+                                .background(
+                                    color = Color(0xFF2755B2),
+                                    shape = RoundedCornerShape(
+                                        bottomEnd = 32.dp,
+                                        bottomStart = 32.dp,
+                                        topStart = 32.dp
+                                    )
 
-                                }
+                                )
+                        ) {
+                            Text(
+                                textAlign = TextAlign.Center,
+                                text = "E-mail",
+                                fontSize = 17.sp,
+                                color = Color(0xFFFFFFFF),
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(start = 20.dp)
+                            )
+                        }
 
-
+                        OutlinedTextField(
+                            value = emailState.value,
+                            onValueChange = { emailState.value = it },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = Color.Transparent,
+                                focusedBorderColor = Color.Transparent
+                            )
                         )
                     }
+
+                }
+                Spacer(modifier = Modifier.height(16.dp))
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(50.dp)
+                        .padding(horizontal = 24.dp),
+                    shape = RoundedCornerShape(32.dp)
+                ) {
+                    Row {
+                        Column(
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier
+                                .width(120.dp)
+                                .height(600.dp)
+                                .background(
+                                    color = Color(0xFF2755B2),
+                                    shape = RoundedCornerShape(
+                                        bottomEnd = 32.dp,
+                                        bottomStart = 32.dp,
+                                        topStart = 32.dp
+                                    )
+
+                                )
+                        ) {
+                            Text(
+                                textAlign = TextAlign.Center,
+                                text = "Senha",
+                                fontSize = 17.sp,
+                                color = Color(0xFFFFFFFF),
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier.padding(start = 20.dp)
+                            )
+                        }
+                        OutlinedTextField(
+                            value = senhaState.value, onValueChange = { senhaState.value = it },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                unfocusedBorderColor = Color.Transparent,
+                                focusedBorderColor = Color.Transparent
+                            )
+                        )
+                    }
+
                 }
 
-                Column (
-                    modifier = Modifier.
-                    fillMaxWidth()
-                ){
+                Button(
+                    onClick = { controleNavegacao.navigate("redefinirsenha" )},
+                    colors = ButtonDefaults
+                        .buttonColors(
+                            containerColor = Color.Transparent
+                        ),
+                    modifier = Modifier,
+                ) {
+                    Text(
+                        text = "Esqueci minha senha",
+                        color = Color(0xFF213787),
+                        fontWeight = FontWeight.Bold,
+
+                        modifier = Modifier
+                            .padding(12.dp)
+
+
+
+                    )
+
+                }
+
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
                     Button(
                         onClick = { /*TODO*/ },
                         colors = ButtonDefaults
@@ -278,13 +275,12 @@ fun landingPageCadastro(controleNavegacao: NavHostController) {
 
         }
 
-}
+    }
 
-@Preview
-@Composable
-private fun landingPage() {
-    landingPageCadastro(controleNavegacao = NavHostController(context = LocalContext.current))
-}
+
+
+        telaCadastro(controleNavegacao = NavHostController(context = LocalContext.current))
+    }
 
 
 

@@ -2,6 +2,7 @@ package br.senai.jandira.sp.callme.telas
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +28,7 @@ import br.senai.sp.jandira.callme.R
 fun landingPage(controleNavegacao: NavHostController) {
     Box(
         modifier = Modifier
+            .clickable { controleNavegacao.navigate("telacadastro") }
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
