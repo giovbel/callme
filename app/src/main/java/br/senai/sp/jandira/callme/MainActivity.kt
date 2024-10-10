@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                         navController = controleNavegacao,
                         startDestination = "landingpage"
                     ){
-                        composable(route = "landingpage") { landingPage(controleNavegacao) }
+                        composable(route = "landingpage") {landingPage(controleNavegacao)}
 
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
