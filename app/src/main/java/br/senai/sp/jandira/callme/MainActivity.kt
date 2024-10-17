@@ -14,10 +14,11 @@ import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.screens.landingPage
 import br.senai.sp.jandira.callme.screens.landingPageChat
 import br.senai.sp.jandira.callme.screens.landingPageDois
+import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
-import br.senai.sp.jandira.callme.screens.redefinirsenhacodigo
 import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.screens.telaLogin
+import br.senai.sp.jandira.callme.screens.telaNotas
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
 
 
@@ -42,8 +43,8 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaCadastro") { telaCadastro(controleNavegacao) }
                         composable(route = "landingPageDois") { landingPageDois(controleNavegacao) }
                         composable(route = "landingPageChat") { landingPageChat(controleNavegacao) }
-                        composable(route = "redefinirSenhaCodigo") { redefinirsenhacodigo(controleNavegacao) }
-
+                        composable(route = "redefinirsenhacodigo") { redefinirSenhaCodigo(controleNavegacao) }
+                        //composable(route = "telaNotas") { telaNotas(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }
