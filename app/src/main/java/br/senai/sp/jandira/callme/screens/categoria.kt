@@ -1,4 +1,4 @@
-package br.senai.jandira.sp.callme.telas
+package br.senai.sp.jandira.callme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

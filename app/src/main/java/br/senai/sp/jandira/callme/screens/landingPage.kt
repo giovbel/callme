@@ -1,4 +1,4 @@
-package br.senai.jandira.sp.callme.telas
+package br.senai.sp.jandira.callme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,7 +28,7 @@ import br.senai.sp.jandira.callme.R
 fun landingPage(controleNavegacao: NavHostController) {
     Box(
         modifier = Modifier
-            .clickable { controleNavegacao.navigate("telacadastro") }
+            .clickable { controleNavegacao.navigate("telaLogin") }
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(

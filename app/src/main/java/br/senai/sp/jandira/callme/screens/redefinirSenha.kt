@@ -235,8 +235,6 @@ fun redefinirsenha(controleNavegacao: NavHostController){
 
                 }
 
-
-
                 Image(
                     painter = painterResource(id = R.drawable.macallmepsicologobanana),
                     contentDescription = "",

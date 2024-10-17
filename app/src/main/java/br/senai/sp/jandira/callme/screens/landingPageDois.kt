@@ -23,10 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 @Composable
-    fun landingpage() {
+fun landingPageDois(controleNavegacao: NavHostController) {
         Card(
             shape = RoundedCornerShape(0.dp),
         ) {

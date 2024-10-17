@@ -11,9 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.senai.jandira.sp.callme.telas.landingPage
+import br.senai.sp.jandira.callme.screens.landingPage
+import br.senai.sp.jandira.callme.screens.landingPageDois
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
+import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
 
 
@@ -32,9 +34,11 @@ class MainActivity : ComponentActivity() {
                         navController = controleNavegacao,
                         startDestination = "landingpage"
                     ){
-                        composable(route = "landingpage") {landingPage(controleNavegacao)}
-                        composable(route = "telacadastro") { telaCadastro(controleNavegacao)}
+                        composable(route = "landingpage") { landingPage(controleNavegacao)}
+                        composable(route = "telaLogin") { telaLogin(controleNavegacao) }
                         composable(route = "redefinirsenha") { redefinirsenha(controleNavegacao) }
+                        composable(route = "telaCadastro") { telaCadastro(controleNavegacao) }
+                        composable(route = "landingPageDois") { landingPageDois(controleNavegacao) }
 
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
