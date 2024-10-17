@@ -1,5 +1,4 @@
 package br.senai.sp.jandira.callme.screens
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +38,7 @@ import br.senai.sp.jandira.callme.R
 
 
 @Composable
-fun redefinirsenha(controleNavegacao: NavHostController){
+fun redefinirsenhacodigo(controleNavegacao: NavHostController){
     var teste = -10.dp;
     var teste1 = -10;
 
@@ -192,7 +191,7 @@ fun redefinirsenha(controleNavegacao: NavHostController){
 
                             ) {
                             Button(
-                                onClick = {controleNavegacao.navigate("redefinirsenhacodigo")},
+                                onClick = { /*TODO*/ },
                                 colors = ButtonDefaults
                                     .buttonColors(
                                         containerColor = Color(0xFF2755B2)

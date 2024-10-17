@@ -224,7 +224,7 @@ fun telaLogin(controleNavegacao: NavHostController) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Button(
-                        onClick = {controleNavegacao.navigate("landingPageDois")},
+                        onClick = {controleNavegacao.navigate("landingPageChat")},
                         colors = ButtonDefaults
                             .buttonColors(
                                 containerColor = Color(0XFFE2EFFF)
