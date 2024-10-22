@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,12 +52,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 
-
 @Composable
-fun telaNotas() {
+fun telaNotas(controleNavegacao: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,7 +84,6 @@ fun telaNotas() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-
                 Image(
                     painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
@@ -102,21 +102,18 @@ fun telaNotas() {
                         .size(50.dp)
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
-                ) {
-
-                }
+                ) {}
             }
-
         }
+
+        // Conteúdo principal que preenche a tela inteira
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(630.dp)
+                .weight(1f) // Preenche o espaço disponível
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color(0xFFC3D9FF),
-                            Color(0xFFC3D9FF),
                             Color(0xFFC3D9FF),
                             Color(0xFFC3D9FF),
                             Color(0xFF9BBAF5),
@@ -129,12 +126,14 @@ fun telaNotas() {
         ) {
             Column {
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(500.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(0.8f), // Preenche 80% da altura
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     IconButton(
-                        onClick = {  },
+                        onClick = { /* TODO */ },
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
                         Icon(
@@ -145,50 +144,36 @@ fun telaNotas() {
                         )
                     }
 
-
                     Box(
                         modifier = Modifier
                             .height(700.dp)
                             .fillMaxWidth(0.7f)
                     ) {
+                        // Cartões sobrepostos
                         Card(
                             modifier = Modifier
                                 .height(255.dp)
                                 .width(276.dp)
                                 .align(Alignment.Center)
                                 .offset(x = -10.dp)
-                                .graphicsLayer {
-                                    rotationZ = -10f
-                                }
+                                .graphicsLayer { rotationZ = -10f }
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFBCDDFF))
-                        ) {
-                            Card(
-                                modifier = Modifier
-                                    .fillMaxHeight()
-                                    .width(210.dp)
-                                    .align(Alignment.End),
-                                colors = CardDefaults.cardColors(Color(0xFF90C6FF))
-                            ) {
+                        ) {}
 
-                            }
-                        }
                         Card(
                             modifier = Modifier
                                 .height(250.dp)
                                 .width(280.dp)
                                 .align(Alignment.Center)
-                                .offset(y = 20.dp,  x = 25.dp)
-                                .graphicsLayer {
-                                    rotationZ = -12f
-                                }
+                                .offset(y = 20.dp, x = 25.dp)
+                                .graphicsLayer { rotationZ = -12f }
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFFFFFD2))
-                        ) {
+                        ) {}
 
-                        }
                         Card(
                             modifier = Modifier
                                 .height(260.dp)
@@ -201,12 +186,12 @@ fun telaNotas() {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxHeight().padding(start = 20.dp, end = 20.dp)
-                                ,
+                                    .fillMaxHeight()
+                                    .padding(start = 20.dp, end = 20.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "Hoje eu estava muito feliz, raro momentos assim, amo viver, brinks sou suicida, hoje me atrasei isso afetou meu psicologico, quero morrer  aaaaaaaaaaaaaa",
+                                    text = "Hoje eu estava muito feliz, raro momentos assim...",
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2754B2)
@@ -217,22 +202,15 @@ fun telaNotas() {
                         Image(
                             painter = painterResource(id = R.drawable.macallmeanotando),
                             contentDescription = "",
-                            modifier = Modifier.size(150.dp).zIndex(12f).offset(y = 27.dp, x = -32.dp),
+                            modifier = Modifier
+                                .size(150.dp)
+                                .zIndex(12f)
+                                .offset(y = 27.dp, x = -32.dp)
                         )
-                        Card (
-                            modifier = Modifier.height(55.dp).width(55.dp).offset(y = 97.dp, x = 195.dp)
-                                .border(3.dp, Color(0xFF020075), RoundedCornerShape(30.dp)),
-                            RoundedCornerShape(30.dp)
-                        ){
-
-                        }
                     }
 
-
-
-
                     IconButton(
-                        onClick = {  },
+                        onClick = { /* TODO */ },
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowForward,
@@ -241,21 +219,23 @@ fun telaNotas() {
                             modifier = Modifier.size(48.dp)
                         )
                     }
-
                 }
-                Row (
-                    modifier = Modifier.fillMaxWidth().height(100.dp),
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = {}, modifier = Modifier
+                        onClick = { /* TODO */ },
+                        modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
-                        shape = RoundedCornerShape(7.dp))
-
-                    {
+                        shape = RoundedCornerShape(7.dp)
+                    ) {
                         Text(
                             text = "Postar Nota",
                             textAlign = TextAlign.Center,
@@ -263,19 +243,16 @@ fun telaNotas() {
                             color = Color.White,
                             fontSize = 15.sp
                         )
-
                     }
-
-
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = {}, modifier = Modifier
+                        onClick = { /* TODO */ },
+                        modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
-                        shape = RoundedCornerShape(7.dp))
-
-                    {
+                        shape = RoundedCornerShape(7.dp)
+                    ) {
                         Text(
                             text = "Responder Nota",
                             textAlign = TextAlign.Center,
@@ -286,9 +263,9 @@ fun telaNotas() {
                     }
                 }
             }
-
         }
 
+        // Barra de navegação inferior
         Box(
             modifier = Modifier
                 .height(70.dp)
@@ -308,10 +285,9 @@ fun telaNotas() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
+                // Botões da barra de navegação
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = { /* TODO */ },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),
@@ -322,12 +298,9 @@ fun telaNotas() {
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
                     )
-
                 }
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = { /* TODO */ },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),
@@ -338,12 +311,9 @@ fun telaNotas() {
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
                     )
-
                 }
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = { /* TODO */ },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),
@@ -353,13 +323,11 @@ fun telaNotas() {
                         painter = painterResource(id = R.drawable.diarioicon),
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
+                            .clickable { controleNavegacao.navigate("telaDiario") }
                     )
-
                 }
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = { /* TODO */ },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),
@@ -370,12 +338,9 @@ fun telaNotas() {
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
                     )
-
                 }
                 Button(
-                    onClick = {
-
-                    },
+                    onClick = { /* TODO */ },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),
@@ -386,10 +351,8 @@ fun telaNotas() {
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
                     )
-
                 }
             }
         }
     }
 }
-
