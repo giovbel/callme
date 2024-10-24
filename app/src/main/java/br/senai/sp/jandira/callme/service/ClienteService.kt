@@ -1,21 +1,18 @@
-package br.senai.sp.jandira.vivaris.service
+package br.senai.sp.jandira.callme.service
 
 import br.senai.sp.jandira.callme.model.Cliente
 import br.senai.sp.jandira.callme.model.ClienteResponse
-import br.senai.sp.jandira.callme.model.LoginCliente
 import br.senai.sp.jandira.callme.model.LoginResponse
-import br.senai.sp.jandira.callme.model.Result
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
-import retrofit2.http.Path
 
 interface ClienteService {
 
 
-    @GET("cliente")
+    @GET("/v1/callme/cliente")
     fun getAllClientes(): Call<Result>
 
 //    @GET("cliente/{id}")
@@ -23,12 +20,12 @@ interface ClienteService {
 //
 
     @Headers("Content-Type: application/json")
-    @POST("login")
-    fun loginUsuario(@Body loginCliente: LoginCliente): Call<LoginResponse>
+    @POST("/v1/callme/login")
+    fun loginUsuario(@Body loginCliente: Cliente): Call<LoginResponse>
 
 
     @Headers("Content-Type: application/json")
-    @POST("cliente")
+    @POST("/v1/callme/cliente")
     fun cadastrarCliente(@Body cliente: Cliente): Call<ClienteResponse>
 
 }

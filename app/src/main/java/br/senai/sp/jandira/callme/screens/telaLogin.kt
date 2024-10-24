@@ -1,7 +1,6 @@
 package br.senai.sp.jandira.callme.screens
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -40,10 +38,9 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
-import br.senai.sp.jandira.callme.model.LoginCliente
-import br.senai.sp.jandira.callme.model.LoginResponse
+import br.senai.sp.jandira.callme.model.Cliente
+import br.senai.sp.jandira.callme.model.ClienteResponse
 import br.senai.sp.jandira.callme.service.RetrofitFactory
-import br.senai.sp.jandira.vivaris.service.ClienteService
 import retrofit2.Call
 
 
@@ -233,10 +230,8 @@ fun telaLogin(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            // Criação do objeto LoginCliente
-                            val loginCliente = LoginCliente(login = emailState.value, senha = senhaState.value)
-                            // Chamada do método de login
-                            loginUsuario(loginCliente, controleNavegacao)
+                            val Cliente = Cliente(email = emailState.value, senha = senhaState.value)
+                            cadastrarUsuario(Cliente, controleNavegacao)
                         },
                         colors = ButtonDefaults
                             .buttonColors(
@@ -293,13 +288,13 @@ fun telaLogin(controleNavegacao: NavHostController) {
 
 }
 
-private fun loginUsuario(loginCliente: LoginCliente, controleNavegacao: NavHostController) {
+private fun cadastrarUsuario(loginCliente: Cliente, controleNavegacao: NavHostController) {
     val retrofitFactory = RetrofitFactory()
     val clienteService = retrofitFactory.getClienteService()
 
 
-    clienteService.loginUsuario(loginCliente).enqueue(object : retrofit2.Callback<LoginResponse> {
-        override fun onResponse(call: Call<LoginResponse>, response: retrofit2.Response<LoginResponse>) {
+    clienteService.loginUsuario(loginCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
+        override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
             if (response.isSuccessful) {
                 // Aqui você pode tratar a resposta de sucesso, como navegar para outra tela
                 controleNavegacao.navigate("landingPageChat")
@@ -310,7 +305,7 @@ private fun loginUsuario(loginCliente: LoginCliente, controleNavegacao: NavHostC
             }
         }
 
-        override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+        override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
             // Aqui você pode tratar falhas de rede, por exemplo, mostrar uma mensagem
         //     Toast.makeText("", "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
             Log.e("Login", "Erro ao conectar api; ${t.message}")
