@@ -230,7 +230,7 @@ fun telaLogin(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            controleNavegacao.navigate("telaNotas")
+                            controleNavegacao.navigate("landingPageDois")
                           //  val Cliente = Cliente(email = emailState.value, senha = senhaState.value)
 
                         },
@@ -270,7 +270,7 @@ fun telaLogin(controleNavegacao: NavHostController) {
                             color = Color(0xFFFFFFFF),
                             fontWeight = FontWeight.Medium,
                             modifier = Modifier
-                                .clickable { controleNavegacao.navigate("telaCadastro") }
+                                .clickable { controleNavegacao.navigate("telaCategoria") }
                                 .fillMaxHeight()
                                 .align(Alignment.CenterHorizontally),
                             lineHeight = 2.em

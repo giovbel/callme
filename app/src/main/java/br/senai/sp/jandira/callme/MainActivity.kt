@@ -17,13 +17,13 @@ import br.senai.sp.jandira.callme.screens.landingPageDois
 import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
-import br.senai.sp.jandira.callme.screens.telaCategoria
 import br.senai.sp.jandira.callme.screens.telaChatList
 import br.senai.sp.jandira.callme.screens.telaCriarPostDiario
 import br.senai.sp.jandira.callme.screens.telaDiario
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
+import senai.jandira.sp.telacategoria.telaCategoria
 
 
 class MainActivity : ComponentActivity() {

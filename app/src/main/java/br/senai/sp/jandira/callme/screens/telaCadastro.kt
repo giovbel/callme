@@ -140,7 +140,7 @@ fun telaCadastro(controleNavegacao: NavHostController) {
             // Botão de criar conta
             Button(
                 onClick = {
-                      controleNavegacao.navigate("landingPageDois")
+                      controleNavegacao.navigate("telaLogin")
                    // val cadastroCliente = Cliente(
                      //   nome = nomeState,
                         //email = emailState,

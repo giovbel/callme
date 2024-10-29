@@ -17,11 +17,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import br.senai.sp.jandira.callme.R
+
 @Composable
-fun Telacategoria() {
+fun telaCategoria(controleNavegacao: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -65,7 +67,7 @@ fun Telacategoria() {
             // Primeiro Card
             Card(
                 elevation = CardDefaults.elevatedCardElevation(20.dp),
-                onClick = { /*TODO*/ },
+                onClick = {controleNavegacao.navigate("telaCadastro")},
                 modifier = Modifier
                     .width(320.dp)
                     .height(105.dp)
@@ -88,7 +90,7 @@ fun Telacategoria() {
                         modifier = Modifier.weight(1f)
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.macallmefalandocomabanana),
+                        painter = painterResource(id = br.senai.sp.jandira.callme.R.drawable.macallmefalandocomabanana),
                         contentDescription = "imagem de perfil",
                         modifier = Modifier
                             .size(80.dp)
@@ -125,7 +127,7 @@ fun Telacategoria() {
                         modifier = Modifier.weight(1f)
                     )
                     Image(
-                        painter = painterResource(id = R.drawable.macallmeouvinte),
+                        painter = painterResource(id = br.senai.sp.jandira.callme.R.drawable.macallmeouvinte),
                         contentDescription = "imagem de perfil",
                         modifier = Modifier
                             .size(80.dp)
