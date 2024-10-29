@@ -230,7 +230,7 @@ fun telaLogin(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            controleNavegacao.navigate("telaCategoria")
+                            controleNavegacao.navigate("telaNotas")
                           //  val Cliente = Cliente(email = emailState.value, senha = senhaState.value)
 
                         },

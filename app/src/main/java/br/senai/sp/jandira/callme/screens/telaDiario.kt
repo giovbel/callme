@@ -10,153 +10,134 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.AbsoluteAlignment
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.R
-
-
-
 
 @Composable
 fun telaDiario(controleNavegacao: NavHostController) {
-
     Box(modifier = Modifier.fillMaxSize()) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        // Top bar
-        Card(
-            modifier = Modifier
-                .height(70.dp)
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(0.dp),
-            colors = CardDefaults.cardColors(Color(0xFF213787))
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Row(
+            // Top bar
+            Card(
                 modifier = Modifier
-                    .padding(12.dp)
+                    .height(70.dp)
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(0.dp),
+                colors = CardDefaults.cardColors(Color(0xFF213787))
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .fillMaxWidth()
+                        .fillMaxHeight(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logo2),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .height(60.dp)
+                            .width(60.dp)
+                    )
+                    Text(
+                        text = "MEU DIÁRIO",
+                        fontSize = 20.sp,
+                        color = Color(0xFFBCE0F6)
+                    )
+                    Card(
+                        modifier = Modifier
+                            .size(50.dp)
+                            .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
+                        shape = RoundedCornerShape(100.dp)
+                    ) {}
+                }
+            }
+
+            // Main content
+            Card(
+                modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .weight(1f), // Adicionando weight para ocupar o restante da tela
+                colors = CardDefaults.cardColors(Color(0xFFE3EFFF)),
+                shape = RoundedCornerShape(0.dp)
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.logo2),
-                    contentDescription = "",
+                Column(
                     modifier = Modifier
-                        .height(60.dp)
-                        .width(60.dp)
-                )
-                Text(
-                    text = "MEU DIÁRIO",
-                    fontSize = 20.sp,
-                    color = Color(0xFFBCE0F6)
-                )
-                Card(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
-                    shape = RoundedCornerShape(100.dp)
-                ) {}
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    DiaryEntry(
+                        title = "Eu quero comer batata",
+                        date = "30/08/24",
+                        content = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo..."
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    DiaryEntry(
+                        title = "Eu quero viver a vida",
+                        date = "31/08/24",
+                        content = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo..."
+                    )
+                }
             }
-        }
 
-        // Main content
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f), // Adicionando weight para ocupar o restante da tela
-            colors = CardDefaults.cardColors(Color(0xFFE3EFFF)),
-            shape = RoundedCornerShape(0.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp)
-            ) {
-                DiaryEntry(
-                    title = "Eu quero comer batata",
-                    date = "30/08/24",
-                    content = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo..."
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                DiaryEntry(
-                    title = "Eu quero viver a vida",
-                    date = "31/08/24",
-                    content = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo..."
-                )
-            }
-        }
-
-        @Composable
-        fun MyFloatingActionButton(onClick: () -> Unit) {
-            FloatingActionButton(
-                onClick = onClick,
-                containerColor = Color(0xFF1F55C6),
-                modifier = Modifier.padding(16.dp)
-                    .clickable { controleNavegacao.navigate("telaCriarPostDiario") },
-            ) {
-                // Adicionando um ícone de "+"
-                Icon(
-                    imageVector = Icons.Default.Add, // Usando o ícone padrão de "+"
-                    contentDescription = "Adicionar entrada"
-                )
-            }
-        }
-
-        Row(
+            // FloatingActionButton to create a new diary post
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color(0xFFE3EFFF)),
                 horizontalArrangement = Arrangement.End,
             ) {
-                MyFloatingActionButton(onClick = {
-
-
-                })
+                MyFloatingActionButton(controleNavegacao = controleNavegacao)
             }
 
-
-        // Bottom bar
-        Card(
-            modifier = Modifier
-                .height(70.dp)
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(0.dp),
-            colors = CardDefaults.cardColors(Color(0xFF213787))
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+            // Bottom bar
+            Card(
+                modifier = Modifier
+                    .height(70.dp)
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(0.dp),
+                colors = CardDefaults.cardColors(Color(0xFF213787))
             ) {
-                BottomBarButton(iconResId = R.drawable.calendarioicon)
-                BottomBarButton(iconResId = R.drawable.chaticon)
-                BottomBarButton(iconResId = R.drawable.diarioicon)
-                BottomBarButton(iconResId = R.drawable.autoajuda)
-                BottomBarButton(iconResId = R.drawable.doacaoicon)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    BottomBarButton(iconResId = R.drawable.calendarioicon)
+                    BottomBarButton(iconResId = R.drawable.chaticon)
+                    BottomBarButton(iconResId = R.drawable.diarioicon)
+                    BottomBarButton(iconResId = R.drawable.autoajuda)
+                    BottomBarButton(iconResId = R.drawable.doacaoicon)
+                }
             }
-
-
         }
-
-
-
-
-
     }
-}}
+}
+
+@Composable
+fun MyFloatingActionButton(controleNavegacao: NavHostController) {
+    FloatingActionButton(
+        onClick = { controleNavegacao.navigate("telaCriarPostDiario") },
+        containerColor = Color(0xFF1F55C6),
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Adicionar entrada"
+        )
+    }
+}
 
 @Composable
 fun DiaryEntry(title: String, date: String, content: String) {
@@ -192,9 +173,6 @@ fun DiaryEntry(title: String, date: String, content: String) {
                             .width(60.dp)
                     )
                 }
-
-
-
             }
 
             Column {
@@ -241,8 +219,7 @@ fun DiaryEntry(title: String, date: String, content: String) {
 @Composable
 fun BottomBarButton(iconResId: Int) {
     Button(
-       onClick = { //controleNavegacao.navigate("telaCriarPostDiario")
-            },
+        onClick = { /* Navegação da barra inferior, se aplicável */ },
         modifier = Modifier
             .size(72.dp)
             .background(Color.Transparent),
@@ -255,4 +232,3 @@ fun BottomBarButton(iconResId: Int) {
         )
     }
 }
-

@@ -32,7 +32,7 @@ fun landingPageChat(controleNavegacao: NavHostController) {
     ) {
         Box(
             modifier = Modifier
-                .clickable { controleNavegacao.navigate("telaNotas") }
+              //  .clickable { controleNavegacao.navigate("telaNotas") }
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
@@ -99,7 +99,7 @@ fun landingPageChat(controleNavegacao: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {},
+                        onClick = {controleNavegacao.navigate("telaChatList")},
                         modifier = Modifier.background(Color.Transparent),
                         colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
