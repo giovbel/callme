@@ -191,7 +191,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = "Hoje eu estava muito feliz, raro momentos assim...",
+                                    text = "Hoje eu estava muito feliz, raros os momentos assim...",
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2754B2)
@@ -300,7 +300,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                     )
                 }
                 Button(
-                    onClick = { /* TODO */ },
+                    onClick = {controleNavegacao.navigate("landingPageChat") },
                     modifier = Modifier
                         .size(72.dp)
                         .background(Color.Transparent),

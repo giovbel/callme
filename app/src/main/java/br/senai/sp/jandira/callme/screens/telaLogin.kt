@@ -230,8 +230,9 @@ fun telaLogin(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         onClick = {
-                            val Cliente = Cliente(email = emailState.value, senha = senhaState.value)
-                            cadastrarUsuario(Cliente, controleNavegacao)
+                            controleNavegacao.navigate("telaCategoria")
+                          //  val Cliente = Cliente(email = emailState.value, senha = senhaState.value)
+
                         },
                         colors = ButtonDefaults
                             .buttonColors(
@@ -288,29 +289,29 @@ fun telaLogin(controleNavegacao: NavHostController) {
 
 }
 
-private fun cadastrarUsuario(loginCliente: Cliente, controleNavegacao: NavHostController) {
-    val retrofitFactory = RetrofitFactory()
-    val clienteService = retrofitFactory.getClienteService()
+//private fun cadastrarUsuario(loginCliente: Cliente, controleNavegacao: NavHostController) {
+  //  val retrofitFactory = RetrofitFactory()
+   // val clienteService = retrofitFactory.getClienteService()
 
 
-    clienteService.loginUsuario(loginCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
-        override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
-            if (response.isSuccessful) {
+   // clienteService.loginUsuario(loginCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
+      //  override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
+       //     if (response.isSuccessful) {
                 // Aqui você pode tratar a resposta de sucesso, como navegar para outra tela
-                controleNavegacao.navigate("landingPageChat")
-            } else {
+              //  controleNavegacao.navigate("landingPageChat")
+          //  } else {
                 // Aqui você pode tratar erros de login, por exemplo, mostrar uma mensagem
-                Log.e("Login", "O login falhou")
+               // Log.e("Login", "O login falhou")
                 // Toast.makeText(context, "Login falhou", Toast.LENGTH_SHORT).show()
-            }
-        }
+          //  }
+       // }
 
-        override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
+      //  override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
             // Aqui você pode tratar falhas de rede, por exemplo, mostrar uma mensagem
         //     Toast.makeText("", "Erro de rede: ${t.message}", Toast.LENGTH_SHORT).show()
-            Log.e("Login", "Erro ao conectar api; ${t.message}")
-        }
-    })
-}
+       //     Log.e("Login", "Erro ao conectar api; ${t.message}")
+      //  }
+   // })
+//}
 
 

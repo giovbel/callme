@@ -17,6 +17,8 @@ import br.senai.sp.jandira.callme.screens.landingPageDois
 import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
+import br.senai.sp.jandira.callme.screens.telaCategoria
+import br.senai.sp.jandira.callme.screens.telaCriarPostDiario
 import br.senai.sp.jandira.callme.screens.telaDiario
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
@@ -47,6 +49,8 @@ class MainActivity : ComponentActivity() {
                         composable(route = "redefinirsenhacodigo") { redefinirSenhaCodigo(controleNavegacao) }
                         composable(route = "telaNotas") { telaNotas(controleNavegacao) }
                         composable(route = "telaDiario") { telaDiario(controleNavegacao) }
+                        composable(route = "telaCategoria") { telaCategoria(controleNavegacao) }
+                        composable(route = "telaCriarPostDiario") { telaCriarPostDiario(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }

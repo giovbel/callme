@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.callme.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ fun landingPageDois(controleNavegacao: NavHostController) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .clickable { controleNavegacao.navigate("telaNotas") }
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(

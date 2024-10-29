@@ -3,6 +3,7 @@ package br.senai.sp.jandira.callme.screens
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
@@ -109,7 +110,7 @@ fun telaCadastro(controleNavegacao: NavHostController) {
             Spacer(modifier = Modifier.height(16.dp))
             // Data de Nascimento
             CampoCadastro(
-                label = "Data de nascimento",
+                label = "Data nascimento",
                 value = datadenascimentoState,
                 onValueChange = { datadenascimentoState = it }
             )
@@ -139,19 +140,22 @@ fun telaCadastro(controleNavegacao: NavHostController) {
             // Botão de criar conta
             Button(
                 onClick = {
-                    val cadastroCliente = Cliente(
-                        nome = nomeState,
-                        email = emailState,
-                        senha = senhaState,
-                        telefone = telefoneState,
-                        cpf = CPFState,
-                        dataNascimento = datadenascimentoState
-                    )
-                    cadastrarUsuario(cadastroCliente, controleNavegacao)
+                      controleNavegacao.navigate("landingPageDois")
+                   // val cadastroCliente = Cliente(
+                     //   nome = nomeState,
+                        //email = emailState,
+                        //senha = senhaState,
+                       // telefone = telefoneState,
+                      //  cpf = CPFState,
+                        //dataNascimento = datadenascimentoState
+                  //  )
+                   // cadastrarUsuario(cadastroCliente, controleNavegacao
+                          //)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFE2EFFF)),
                 modifier = Modifier
                     .width(350.dp)
+
                     .height(97.dp)
                     .padding(start = 52.dp, end = 16.dp, top = 26.dp, bottom = 30.dp),
                 shape = RoundedCornerShape(size = 32.dp)
@@ -180,7 +184,7 @@ fun CampoCadastro(label: String, value: String, onValueChange: (String) -> Unit)
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .width(120.dp)
+                    .width(128.dp)
                     .height(600.dp)
                     .background(
                         color = Color(0xFF2755B2),
@@ -216,17 +220,17 @@ private fun cadastrarUsuario(cadastroCliente: Cliente, controleNavegacao: NavHos
     val retrofitFactory = RetrofitFactory()
     val clienteService = retrofitFactory.getClienteService()
 
-    clienteService.cadastrarCliente(cadastroCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
-        override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
-            if (response.isSuccessful) {
-                controleNavegacao.navigate("landingPageChat")
-            } else {
-                Log.e("Cadastro", "Falha ao cadastrar")
-            }
-        }
+    //clienteService.cadastrarCliente(cadastroCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
+       // override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
+         //   if (response.isSuccessful) {
+           //     controleNavegacao.navigate("landingPageChat")
+          // } else {
+           //     Log.e("Cadastro", "Falha ao cadastrar")
+       //     }
+      //  }
 
-        override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
-            Log.e("Cadastro", "Erro de rede: ${t.message}")
-        }
-    })
+       // override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
+            //Log.e("Cadastro", "Erro de rede: ${t.message}")
+    //    }
+   // })
 }

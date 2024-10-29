@@ -2,6 +2,7 @@ package br.senai.sp.jandira.callme.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,10 +32,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 @Composable
-fun telacriar() {
+fun telaCriarPostDiario(controleNavegacao: NavHostController) {
 
     var  (title, setTitle) = remember {
         mutableStateOf("")
@@ -85,6 +87,7 @@ fun telacriar() {
                 Card(
                     modifier = Modifier
                         .size(50.dp)
+
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
                 ) {
@@ -117,6 +120,7 @@ fun telacriar() {
         Box(
             modifier = Modifier
                 .height(70.dp)
+
                 .fillMaxWidth()
                 .background(
                     Brush.horizontalGradient(
@@ -162,6 +166,7 @@ fun telacriar() {
                         painter = painterResource(id = R.drawable.chaticon),
                         contentDescription = "",
                         modifier = Modifier.size(60.dp)
+                            .clickable{ controleNavegacao.navigate("landingPageChat") },
                     )
 
                 }

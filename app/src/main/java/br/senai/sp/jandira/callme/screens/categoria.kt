@@ -19,14 +19,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 
 @Composable
-fun Categoria() {
+fun telaCategoria(controleNavegacao: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
+
             .background(
                 Brush.linearGradient(
                     colors = listOf(
@@ -56,9 +58,3 @@ fun Categoria() {
     }
 }
 
-
-    @Preview(showBackground = true, showSystemUi = true)
-    @Composable
-    fun GreetingPreview() {
-        Categoria()
-    }

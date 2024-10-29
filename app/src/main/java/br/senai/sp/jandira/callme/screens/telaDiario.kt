@@ -3,6 +3,7 @@ package br.senai.sp.jandira.callme.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -24,20 +25,6 @@ import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.R
 
 
-@Composable
-fun MyFloatingActionButton(onClick: () -> Unit) {
-    FloatingActionButton(
-        onClick = onClick,
-        containerColor = Color(0xFF1F55C6),
-        modifier = Modifier.padding(16.dp) // Adiciona espaço ao redor do FAB
-    ) {
-        // Adicionando um ícone de "+"
-        Icon(
-            imageVector = Icons.Default.Add, // Usando o ícone padrão de "+"
-            contentDescription = "Adicionar entrada"
-        )
-    }
-}
 
 
 @Composable
@@ -65,7 +52,7 @@ fun telaDiario(controleNavegacao: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.logo),
+                    painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
                     modifier = Modifier
                         .height(60.dp)
@@ -112,7 +99,23 @@ fun telaDiario(controleNavegacao: NavHostController) {
             }
         }
 
-            Row(
+        @Composable
+        fun MyFloatingActionButton(onClick: () -> Unit) {
+            FloatingActionButton(
+                onClick = onClick,
+                containerColor = Color(0xFF1F55C6),
+                modifier = Modifier.padding(16.dp)
+                    .clickable { controleNavegacao.navigate("telaCriarPostDiario") },
+            ) {
+                // Adicionando um ícone de "+"
+                Icon(
+                    imageVector = Icons.Default.Add, // Usando o ícone padrão de "+"
+                    contentDescription = "Adicionar entrada"
+                )
+            }
+        }
+
+        Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color(0xFFE3EFFF)),
@@ -238,7 +241,8 @@ fun DiaryEntry(title: String, date: String, content: String) {
 @Composable
 fun BottomBarButton(iconResId: Int) {
     Button(
-        onClick = { /*TODO: Add action*/ },
+       onClick = { //controleNavegacao.navigate("telaCriarPostDiario")
+            },
         modifier = Modifier
             .size(72.dp)
             .background(Color.Transparent),
@@ -252,9 +256,3 @@ fun BottomBarButton(iconResId: Int) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    val controleNavegacao = rememberNavController()
-        telaDiario(controleNavegacao)
-}
