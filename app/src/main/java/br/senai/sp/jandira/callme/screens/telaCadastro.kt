@@ -22,8 +22,9 @@ import br.senai.sp.jandira.callme.R
 import br.senai.sp.jandira.callme.model.Cliente
 import br.senai.sp.jandira.callme.model.ClienteResponse
 import br.senai.sp.jandira.callme.service.RetrofitFactory
-
 import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
 fun telaCadastro(controleNavegacao: NavHostController) {
@@ -31,7 +32,8 @@ fun telaCadastro(controleNavegacao: NavHostController) {
     var nomeState by remember { mutableStateOf("") }
     var emailState by remember { mutableStateOf("") }
     var senhaState by remember { mutableStateOf("") }
-    var telefoneState by remember { mutableStateOf("") }
+    var confirmaSenhaState by remember { mutableStateOf("") }
+
     var CPFState by remember { mutableStateOf("") }
     var datadenascimentoState by remember { mutableStateOf("") }
 
@@ -73,48 +75,20 @@ fun telaCadastro(controleNavegacao: NavHostController) {
                 )
             }
             Spacer(modifier = Modifier.height(50.dp))
-            // Nome
-            CampoCadastro(
-                label = "Nome",
-                value = nomeState,
-                onValueChange = { nomeState = it }
-            )
+            // Campos de entrada
+            CampoCadastro(label = "Nome", value = nomeState, onValueChange = { nomeState = it })
             Spacer(modifier = Modifier.height(16.dp))
-            // Email
-            CampoCadastro(
-                label = "E-mail",
-                value = emailState,
-                onValueChange = { emailState = it }
-            )
+            CampoCadastro(label = "E-mail", value = emailState, onValueChange = { emailState = it })
             Spacer(modifier = Modifier.height(16.dp))
-            // Senha
-            CampoCadastro(
-                label = "Senha",
-                value = senhaState,
-                onValueChange = { senhaState = it }
-            )
+            CampoCadastro(label = "Senha", value = senhaState, onValueChange = { senhaState = it })
             Spacer(modifier = Modifier.height(16.dp))
-            // Telefone
-            CampoCadastro(
-                label = "Telefone",
-                value = telefoneState,
-                onValueChange = { telefoneState = it }
-            )
+            CampoCadastro(label = "Confirmar Senha", value = confirmaSenhaState, onValueChange = { confirmaSenhaState = it })
             Spacer(modifier = Modifier.height(16.dp))
-            // CPF
-            CampoCadastro(
-                label = "CPF",
-                value = CPFState,
-                onValueChange = { CPFState = it }
-            )
+            CampoCadastro(label = "CPF", value = CPFState, onValueChange = { CPFState = it })
             Spacer(modifier = Modifier.height(16.dp))
-            // Data de Nascimento
-            CampoCadastro(
-                label = "Data nascimento",
-                value = datadenascimentoState,
-                onValueChange = { datadenascimentoState = it }
-            )
+            CampoCadastro(label = "Data nascimento", value = datadenascimentoState, onValueChange = { datadenascimentoState = it })
             Spacer(modifier = Modifier.height(16.dp))
+
             // Checkbox de termos
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -137,25 +111,60 @@ fun telaCadastro(controleNavegacao: NavHostController) {
                 )
             }
             Spacer(modifier = Modifier.height(2.dp))
+
             // Botão de criar conta
             Button(
-                onClick = {
-                      controleNavegacao.navigate("telaLogin")
-                   // val cadastroCliente = Cliente(
-                     //   nome = nomeState,
-                        //email = emailState,
-                        //senha = senhaState,
-                       // telefone = telefoneState,
-                      //  cpf = CPFState,
-                        //dataNascimento = datadenascimentoState
-                  //  )
-                   // cadastrarUsuario(cadastroCliente, controleNavegacao
-                          //)
+                onClick = {  val nascimento = datadenascimentoState
+                    var dataNascimento = ""
+                    if (nascimento.contains("/")) {
+                        //arruma o estilo da data pra mandar ela bonitinha pro back
+                        val partes = nascimento.split("/")
+                        val dia = partes[0]
+                        val mes = partes[1]
+                        val ano = partes[2]
+                        dataNascimento = "$ano-$mes-$dia"
+                        Log.i("323", dataNascimento)
+                    } else {
+//                        mensagemErroState =
+//                            "O formato do campo data de nascimento está incorreto"
+//                        umError.value = true
+                        Log.i("CARALHO","127")
+                    }
+                    if (emailState == "" || nomeState == "" || datadenascimentoState == "" || senhaState == "" || confirmaSenhaState == "") {
+//                        mensagemErroState = "Todos os campos devem ser preenchidos"
+//                        umError = true
+                        Log.i("CARALHO","127")
+
+                    } else if (senhaState != confirmaSenhaState) {
+//                        mensagemErroState = "Sua senha não confere"
+//                        umError = true
+                        Log.i("CARALHO","127")
+
+                    } else if (senhaState.length > 8 || confirmaSenhaState.length > 8) {
+//                        mensagemErroState = "Sua senha deve ter 8 caracteres"
+//                        umError = true
+                        Log.i("CARALHO","127")
+
+                    } else if (datadenascimentoState.length > 10) {
+//                        mensagemErroState =
+//                            "O formato do campo data de nascimento está incorreto"
+//                        umError = true
+                        Log.i("CARALHO","127")
+
+                    } else{
+                    val cadastroCliente = Cliente(
+                        nome = nomeState,
+                        login = emailState,
+                        senha = senhaState,
+                        cpf = CPFState,
+                        nascimento =  dataNascimento,
+                        idAvatar = 1
+                    )
+                    cadastrarUsuario(cadastroCliente, controleNavegacao)}
                 },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0XFFE2EFFF)),
                 modifier = Modifier
                     .width(350.dp)
-
                     .height(97.dp)
                     .padding(start = 52.dp, end = 16.dp, top = 26.dp, bottom = 30.dp),
                 shape = RoundedCornerShape(size = 32.dp)
@@ -185,7 +194,6 @@ fun CampoCadastro(label: String, value: String, onValueChange: (String) -> Unit)
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .width(128.dp)
-                    .height(600.dp)
                     .background(
                         color = Color(0xFF2755B2),
                         shape = RoundedCornerShape(
@@ -210,27 +218,28 @@ fun CampoCadastro(label: String, value: String, onValueChange: (String) -> Unit)
                 colors = OutlinedTextFieldDefaults.colors(
                     unfocusedBorderColor = Color.Transparent,
                     focusedBorderColor = Color.Transparent
-                )
+                ),
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
 }
 
 private fun cadastrarUsuario(cadastroCliente: Cliente, controleNavegacao: NavHostController) {
-    val retrofitFactory = RetrofitFactory()
-    val clienteService = retrofitFactory.getClienteService()
+    val clienteService = RetrofitFactory.getClienteService()
 
-    //clienteService.cadastrarCliente(cadastroCliente).enqueue(object : retrofit2.Callback<ClienteResponse> {
-       // override fun onResponse(call: Call<ClienteResponse>, response: retrofit2.Response<ClienteResponse>) {
-         //   if (response.isSuccessful) {
-           //     controleNavegacao.navigate("landingPageChat")
-          // } else {
-           //     Log.e("Cadastro", "Falha ao cadastrar")
-       //     }
-      //  }
+    clienteService.cadastrarCliente(cadastroCliente).enqueue(object : Callback<ClienteResponse> {
+        override fun onResponse(call: Call<ClienteResponse>, response: Response<ClienteResponse>) {
+            if (response.isSuccessful) {
+                Log.d("Cadastro", "Cadastro realizado com sucesso!")
+                controleNavegacao.navigate("landingPageChat")
+            } else {
+                Log.e("Cadastro", "Falha ao cadastrar: ${response.errorBody()?.string()}")
+            }
+        }
 
-       // override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
-            //Log.e("Cadastro", "Erro de rede: ${t.message}")
-    //    }
-   // })
+        override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
+            Log.e("Cadastro", "Erro de rede: ${t.message}")
+        }
+    })
 }

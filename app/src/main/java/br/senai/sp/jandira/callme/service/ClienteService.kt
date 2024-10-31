@@ -7,24 +7,21 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ClienteService {
 
+    @GET("/v1/callme/cliente")
+    fun getAllClientes(): Call<List<ClienteResponse>>
 
-   // @GET("/v1/callme/cliente")
-    //fun getAllClientes(): Call<Result>
+    @GET("/v1/callme/cliente/{id}")
+    fun getClienteById(@Path("id") id: Int): Call<ClienteResponse>
 
-//    @GET("cliente/{id}")
-//    fun getClienteById( @Path("id") id: Int): Call<Cliente>
-//
+    @Headers("Content-Type: application/json")
+    @POST("/v1/callme/login")
+    fun loginUsuario(@Body loginCliente: Cliente): Call<ClienteResponse>
 
-   // @Headers("Content-Type: application/json")
-   // @POST("/v1/callme/login")
-   // fun loginUsuario(@Body loginCliente: Cliente): Call<LoginResponse>
-
-
-  //  @Headers("Content-Type: application/json")
-  //  @POST("/v1/callme/cliente")
-  //  fun cadastrarCliente(@Body cliente: Cliente): Call<ClienteResponse>
-
+    @Headers("Content-Type: application/json")
+    @POST("/v1/callme/cliente")
+    fun cadastrarCliente(@Body cliente: Cliente): Call<ClienteResponse>
 }
