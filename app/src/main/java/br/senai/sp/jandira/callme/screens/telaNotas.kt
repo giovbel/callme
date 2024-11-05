@@ -18,10 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,40 +28,29 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
-import br.senai.sp.jandira.callme.model.Cliente
-import br.senai.sp.jandira.callme.model.ClienteResponse
 import br.senai.sp.jandira.callme.model.NotasResponse
 import br.senai.sp.jandira.callme.model.Postagem
 import br.senai.sp.jandira.callme.service.RetrofitFactory
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
 fun telaNotas(controleNavegacao: NavHostController) {
-    // Variáveis de estado para armazenar as notas e a mensagem de erro
- //   var notas by remember { mutableStateOf<List<Nota>>(emptyList()) }
     var notas by remember { mutableStateOf<List<Postagem>>(emptyList()) }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-    val coroutineScope = rememberCoroutineScope()
-
-    var loadingNotas by remember { mutableStateOf(true) }
-
-    val retrofitFactory = RetrofitFactory
-    val notaService = retrofitFactory.getNotasService()
-
+    var currentNoteIndex by remember { mutableStateOf(0) }
     val context = LocalContext.current
+    var loadingNotas by remember { mutableStateOf(true) }
+    val notaService = RetrofitFactory.getNotasService()
 
+    // Carregar as notas
     LaunchedEffect(Unit) {
         notaService.getNotas().enqueue(object : Callback<NotasResponse> {
             override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
                 if (response.isSuccessful) {
-                    notas = response.body()?.dados?: emptyList()
-                    Log.d("Sexos", "Notas carregadas: $notas")
+                    notas = response.body()?.dados ?: emptyList()
                 } else {
                     Toast.makeText(context, "Erro ao carregar notas: ${response.code()}", Toast.LENGTH_SHORT).show()
-                    Log.e("Erro", "Corpo da resposta: ${response.errorBody()?.string()}")
                 }
                 loadingNotas = false
             }
@@ -76,8 +63,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         // Cabeçalho da tela
         Box(
@@ -86,12 +72,8 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 .fillMaxWidth()
                 .background(
                     Brush.horizontalGradient(
-                        colors = listOf(
-                            Color(0xFF213787),
-                            Color(0xFF245FB0),
-                            Color(0xFF6E96E8)
-                        )
-                    ),
+                        colors = listOf(Color(0xFF213787), Color(0xFF245FB0), Color(0xFF6E96E8))
+                    )
                 )
         ) {
             Row(
@@ -105,9 +87,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 Image(
                     painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
-                    modifier = Modifier
-                        .height(60.dp)
-                        .width(60.dp)
+                    modifier = Modifier.size(60.dp)
                 )
                 Text(
                     text = "NOTAS",
@@ -115,12 +95,6 @@ fun telaNotas(controleNavegacao: NavHostController) {
                     color = Color.White,
                     fontWeight = FontWeight.Medium
                 )
-                Card(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
-                    shape = RoundedCornerShape(100.dp),
-                ) {}
             }
         }
 
@@ -131,13 +105,8 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 .weight(1f)
                 .background(
                     Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFFC3D9FF),
-                            Color(0xFFC3D9FF),
-                            Color(0xFF9BBAF5),
-                            Color(0xFF1B55CD),
-                        )
-                    ),
+                        colors = listOf(Color(0xFFC3D9FF), Color(0xFF9BBAF5), Color(0xFF1B55CD))
+                    )
                 ),
             shape = RoundedCornerShape(0.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
@@ -151,7 +120,9 @@ fun telaNotas(controleNavegacao: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     IconButton(
-                        onClick = { /* TODO */ },
+                        onClick = {
+                            if (currentNoteIndex > 0) currentNoteIndex--
+                        },
                         modifier = Modifier.padding(start = 16.dp)
                     ) {
                         Icon(
@@ -164,17 +135,17 @@ fun telaNotas(controleNavegacao: NavHostController) {
 
                     Box(
                         modifier = Modifier
-                            .height(700.dp)
+                            .height(260.dp)
                             .fillMaxWidth(0.7f)
                     ) {
-                        // Cartões sobrepostos
+                        // Cartões sobrepostos para o efeito visual
                         Card(
                             modifier = Modifier
                                 .height(255.dp)
                                 .width(276.dp)
                                 .align(Alignment.Center)
                                 .offset(x = -10.dp)
-                                .graphicsLayer { rotationZ = -10f }
+                                .rotate(-10f)
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFBCDDFF))
@@ -186,13 +157,13 @@ fun telaNotas(controleNavegacao: NavHostController) {
                                 .width(280.dp)
                                 .align(Alignment.Center)
                                 .offset(y = 20.dp, x = 25.dp)
-                                 .graphicsLayer { rotationZ = -12f }
+                                .rotate(-12f)
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFFFFFD2))
                         ) {}
 
-                        // Card principal com o conteúdo da nota
+                        // Cartão principal que exibe o conteúdo da nota
                         Card(
                             modifier = Modifier
                                 .height(260.dp)
@@ -206,11 +177,13 @@ fun telaNotas(controleNavegacao: NavHostController) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxHeight()
-                                    .padding(start = 20.dp, end = 20.dp),
+                                    .padding(20.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = if (notas.isNotEmpty()) notas[0].conteudo else "Carregando...",
+                                    text = if (notas.isNotEmpty() && currentNoteIndex < notas.size) {
+                                        notas[currentNoteIndex].conteudo
+                                    } else "Carregando...",
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2754B2)
@@ -229,7 +202,10 @@ fun telaNotas(controleNavegacao: NavHostController) {
                     }
 
                     IconButton(
-                        onClick = { /* TODO */ },
+                        onClick = {
+                            if (currentNoteIndex < notas.size - 1 && currentNoteIndex < 4) currentNoteIndex++
+                        },
+                        modifier = Modifier.padding(end = 16.dp)
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowForward,
@@ -239,72 +215,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                         )
                     }
                 }
-
-                // Botões de ação na parte inferior
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(100.dp),
-                    horizontalArrangement = Arrangement.SpaceAround,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Button(
-                        colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { /* TODO */ },
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(160.dp),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Text(
-                            text = "Postar Nota",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            fontSize = 15.sp
-                        )
-                    }
-
-                    Button(
-                        colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { /* TODO */ },
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(160.dp),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Text(
-                            text = "Responder Nota",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            fontSize = 15.sp
-                        )
-                    }
-                }
             }
         }
     }
 }
-
-private fun getNotas(cliente: Cliente, navController: NavHostController, context: Context) {
-    val clienteService = RetrofitFactory.getClienteService().loginUsuario(cliente)
-
-    clienteService./*loginUsuari(cliente)*/enqueue(object : Callback<ClienteResponse> {
-        override fun onResponse(call: Call<ClienteResponse>, response: Response<ClienteResponse>) {
-            if (response.isSuccessful) {
-                navController.navigate("telaNotas")
-                Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
-            } else {
-                Log.e("Login", "O login falhou: ${response.message()}")
-                Toast.makeText(context, "Login falhou. Verifique suas credenciais.", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        override fun onFailure(call: Call<ClienteResponse>, t: Throwable) {
-            Log.e("Login", "Erro de rede: ${t.message}")
-            Toast.makeText(context, "Erro de rede. Tente novamente.", Toast.LENGTH_SHORT).show()
-        }
-    })
-}
-
