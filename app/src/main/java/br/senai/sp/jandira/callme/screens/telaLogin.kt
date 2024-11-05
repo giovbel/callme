@@ -188,7 +188,7 @@ private fun fazerLogin(cliente: Cliente, navController: NavHostController, conte
     clienteService./*loginUsuari(cliente)*/enqueue(object : Callback<ClienteResponse> {
         override fun onResponse(call: Call<ClienteResponse>, response: Response<ClienteResponse>) {
             if (response.isSuccessful) {
-                navController.navigate("landingPageChat")
+                navController.navigate("telaNotas")
                 Toast.makeText(context, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
             } else {
                 Log.e("Login", "O login falhou: ${response.message()}")
