@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.senai.jandira.sp.telacriarpostdiario.telaCriarPostDiario
 import br.senai.sp.jandira.callme.screens.landingPage
 import br.senai.sp.jandira.callme.screens.landingPageChat
 import br.senai.sp.jandira.callme.screens.landingPageDois
@@ -18,7 +19,6 @@ import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.screens.telaChatList
-import br.senai.sp.jandira.callme.screens.telaCriarPostDiario
 import br.senai.sp.jandira.callme.screens.telaDiario
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas

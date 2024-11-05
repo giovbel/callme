@@ -11,6 +11,6 @@ import retrofit2.http.Headers
 
 interface NotaService {
 
-    @GET("notas")
+    @GET("notas?excluidas=false")
     fun getNotas(): Call<NotasResponse>
 }
