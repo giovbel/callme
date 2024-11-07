@@ -19,6 +19,7 @@ import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.screens.telaChatList
+import br.senai.sp.jandira.callme.screens.telaCriarNotas
 import br.senai.sp.jandira.callme.screens.telaDiario
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
@@ -53,6 +54,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaCategoria") { telaCategoria(controleNavegacao) }
                         composable(route = "telaCriarPostDiario") { telaCriarPostDiario(controleNavegacao) }
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
+                        composable(route = "telaCriarNotas") { telaCriarNotas(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }

@@ -15,22 +15,27 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.R
 import br.senai.sp.jandira.callme.model.NotasResponse
 import br.senai.sp.jandira.callme.model.Postagem
 import br.senai.sp.jandira.callme.service.RetrofitFactory
+import coil.compose.rememberAsyncImagePainter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,6 +47,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
     var loadingNotas by remember { mutableStateOf(true) }
     val context = LocalContext.current
     val notaService = RetrofitFactory.getNotasService()
+
     LaunchedEffect(Unit) {
         notaService.getNotas().enqueue(object : Callback<NotasResponse> {
             override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
@@ -88,7 +94,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                             Color(0xFF245FB0),
                             Color(0xFF6E96E8)
                         )
-                    ),
+                    )
                 )
         ) {
             Row(
@@ -120,6 +126,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 ) {}
             }
         }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -131,7 +138,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                             Color(0xFF9BBAF5),
                             Color(0xFF1B55CD),
                         )
-                    ),
+                    )
                 ),
             shape = RoundedCornerShape(0.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
@@ -187,6 +194,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFFFFFD2))
                         ) {}
+
                         Card(
                             modifier = Modifier
                                 .height(260.dp)
@@ -199,9 +207,10 @@ fun telaNotas(controleNavegacao: NavHostController) {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxHeight()
+                                    .fillMaxSize()
                                     .padding(start = 20.dp, end = 20.dp),
                                 contentAlignment = Alignment.Center
+
                             ) {
                                 Text(
                                     text = if (!loadingNotas && notas.isNotEmpty()) notas[currentNoteIndex].conteudo else "Carregando...",
@@ -220,12 +229,38 @@ fun telaNotas(controleNavegacao: NavHostController) {
                                 .zIndex(12f)
                                 .offset(y = 105.dp, x = -32.dp)
                         )
+
+                        Card(
+                            modifier = Modifier
+                                .height(55.dp)
+                                .width(55.dp)
+                                .offset(y = 170.dp, x = 210.dp)
+                                .border(3.dp, Color(0xFF020075), RoundedCornerShape(30.dp)),
+                            shape = RoundedCornerShape(30.dp)
+                        ) {
+                            Box(modifier = Modifier.fillMaxSize()) {
+                                val profilePainter: Painter = if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario.foto.isNullOrEmpty()) {
+                                    rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario.foto)
+                                } else {
+                                    painterResource(id = R.drawable.perfilcomum)
+                                }
+
+                                Image(
+                                    painter = profilePainter,
+                                    contentDescription = "",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .clip(RoundedCornerShape(30.dp))
+                                )
+                            }
+                        }
                     }
 
                     IconButton(
                         onClick = {
                             if (currentNoteIndex < notas.size - 1) currentNoteIndex++
-                        },
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.Default.ArrowForward,
@@ -245,139 +280,120 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { /* Ação para postar nota */ },
+                        onClick = { controleNavegacao.navigate("telaCriarNotas") },
                         modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
                         shape = RoundedCornerShape(7.dp)
                     ) {
                         Text(
-                            text = "Postar Nota",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
+                            text = "Criar Nota",
                             color = Color.White,
-                            fontSize = 15.sp
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 14.sp
                         )
                     }
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { /* Ação para responder nota */ },
+                        onClick = { controleNavegacao.popBackStack() },
                         modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
                         shape = RoundedCornerShape(7.dp)
                     ) {
                         Text(
-                            text = "Responder Nota",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
+                            text = "Voltar",
                             color = Color.White,
-                            fontSize = 15.sp
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 14.sp
                         )
                     }
                 }
-                Box(
-                    modifier = Modifier
-                        .height(70.dp)
-
-                        .fillMaxWidth()
-                        .background(
-                            Brush.horizontalGradient(
-                                colors = listOf(
-                                    Color(0xFF213787),
-                                    Color(0xFF245FB0),
-                                    Color(0xFF6E96E8)
-                                )
-                            ),
-                        )
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                    Button(
+                        onClick = {
+
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
-                        Button(
-                            onClick = {
+                        Image(
+                            painter = painterResource(id = R.drawable.calendarioicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.calendarioicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
+                    }
+                    Button(
+                        onClick = {
 
-                        }
-                        Button(
-                            onClick = {
-                                controleNavegacao.navigate("telaChatList")
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.chaticon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                                    .clickable { controleNavegacao.navigate("landingPageChat") },
-                            )
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.chaticon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                        }
-                        Button(
-                            onClick = {
-                                controleNavegacao.navigate("telaDiario")
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.diarioicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
+                    }
+                    Button(
+                        onClick = {
 
-                        }
-                        Button(
-                            onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.diarioicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.autoajuda),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
+                    }
+                    Button(
+                        onClick = {
 
-                        }
-                        Button(
-                            onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.autoajuda),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.doacaoicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
+                    }
+                    Button(
+                        onClick = {
 
-                        }
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.doacaoicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
+
                     }
                 }
             }
@@ -385,3 +401,5 @@ fun telaNotas(controleNavegacao: NavHostController) {
         }
     }
 }
+
+
