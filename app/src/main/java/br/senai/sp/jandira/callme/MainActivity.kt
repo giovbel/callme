@@ -21,6 +21,7 @@ import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.screens.telaChatList
 import br.senai.sp.jandira.callme.screens.telaCriarNotas
 import br.senai.sp.jandira.callme.screens.telaDiario
+import br.senai.sp.jandira.callme.screens.telaEscolherAvatar
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaCriarPostDiario") { telaCriarPostDiario(controleNavegacao) }
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
                         composable(route = "telaCriarNotas") { telaCriarNotas(controleNavegacao) }
+                        composable(route = "telaEscolherAvatar") { telaEscolherAvatar(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }
