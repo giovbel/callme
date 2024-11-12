@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -174,10 +175,36 @@ fun telaEscolherAvatar(navController: NavHostController) {
                         ) {}
                     }
                 }
-                Card (
-                    modifier = Modifier.height(50.dp).width(200.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF558DFF))
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
                 ){
+                    Row (
+                        modifier = Modifier
+                            .height(50.dp)
+                            .width(200.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .align(Alignment.Center)
+                            .background(Color(0xFFBBD1FF)),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Text(
+                            textAlign = TextAlign.Center,
+                            text = "Finalizar",
+                            fontSize = 19.sp,
+                            color = Color(0xFF04276D),
+                            fontWeight = FontWeight.Medium
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.finalizar),
+                            contentDescription = "",
+                            modifier = Modifier
+                                .width(20.dp)
+                                .height(20.dp)
+                        )
+                    }
+
                 }
             }
 
