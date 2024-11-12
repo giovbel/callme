@@ -150,10 +150,12 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                             },
                         singleLine = true,
                         colors = TextFieldDefaults.colors(
-                            focusedIndicatorColor = Color.Transparent,   // Remove a linha de foco
-                            unfocusedIndicatorColor = Color.Transparent, // Remove a linha sem foco
-                            disabledIndicatorColor = Color.Transparent,  // Remove a linha desabilitada
-                            errorIndicatorColor = Color.Transparent      // Remove a linha de erro
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            disabledContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            focusedLabelColor = Color.Transparent,
+                            errorContainerColor = Color.Transparent
                         )
                     )
 

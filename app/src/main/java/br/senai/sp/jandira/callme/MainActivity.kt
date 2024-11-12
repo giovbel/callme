@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaCriarPostDiario"
+                        startDestination = "telaEscolherAvatar"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }
