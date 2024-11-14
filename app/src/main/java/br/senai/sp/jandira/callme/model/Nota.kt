@@ -16,6 +16,11 @@ data class Postagem(
     val idUsuario: Int=0
 
 )
+data class NotaResponse(
+    val dados: Postagem,
+    val quantidade: Int,
+    val status_code: Int
+)
 
 data class Usuario(
     val id: Int,

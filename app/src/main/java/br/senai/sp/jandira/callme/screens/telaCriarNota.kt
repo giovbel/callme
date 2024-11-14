@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
+import br.senai.sp.jandira.callme.model.NotaResponse
 import br.senai.sp.jandira.callme.model.NotasResponse
 import br.senai.sp.jandira.callme.model.Postagem
 import br.senai.sp.jandira.callme.service.RetrofitFactory
@@ -245,9 +246,9 @@ fun telaCriarNota(controleNavegacao: NavHostController) {
                         onClick = {
                             if (nota.text.isNotEmpty()) {
                                 val novaNota = Postagem(conteudo = nota.text, idUsuario = 2) // Ajuste o ID conforme necessário
-Log.i("calma",novaNota.toString())
-                                notaService.adicionarNota(novaNota).enqueue(object : Callback<NotasResponse> {
-                                    override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
+                                notaService.adicionarNota(novaNota).enqueue(object : Callback<NotaResponse> {
+                                    override fun onResponse(call: Call<NotaResponse>, response: Response<NotaResponse>) {
+                                        Log.i("calma",response.toString())
                                         if (response.isSuccessful) {
                                             Toast.makeText(context, "Nota adicionada com sucesso!", Toast.LENGTH_SHORT).show()
                                             controleNavegacao.navigate("telaNotas")
@@ -256,7 +257,8 @@ Log.i("calma",novaNota.toString())
                                         }
                                     }
 
-                                    override fun onFailure(call: Call<NotasResponse>, t: Throwable) {
+                                    override fun onFailure(call: Call<NotaResponse>, t: Throwable) {
+                                        Log.i("Calma", t.message.toString())
                                         Toast.makeText(context, "Falha na comunicação com o servidor.", Toast.LENGTH_SHORT).show()
                                     }
                                 })

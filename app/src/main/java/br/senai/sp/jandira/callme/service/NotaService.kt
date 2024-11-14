@@ -2,6 +2,7 @@ package br.senai.sp.jandira.callme.service
 
 import br.senai.sp.jandira.callme.model.Cliente
 import br.senai.sp.jandira.callme.model.ClienteResponse
+import br.senai.sp.jandira.callme.model.NotaResponse
 import br.senai.sp.jandira.callme.model.NotasResponse
 import br.senai.sp.jandira.callme.model.Postagem
 import retrofit2.Call
@@ -17,5 +18,5 @@ interface NotaService {
 
     @Headers("Content-Type: application/json")
     @POST("nota")  // Corrigido para a URL correta
-    fun adicionarNota(@Body nota: Postagem): Call<NotasResponse>
+    fun adicionarNota(@Body nota: Postagem): Call<NotaResponse>
 }
