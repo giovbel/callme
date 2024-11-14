@@ -25,6 +25,7 @@ import br.senai.sp.jandira.callme.screens.telaEscolherAvatar
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
 import br.senai.sp.jandira.callme.ui.theme.CallmeTheme
+import br.senai.sp.jandira.telacriarnota.telaComentariosLeitor
 import senai.jandira.sp.telacategoria.telaCategoria
 
 
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaEscolherAvatar"
+                        startDestination = "telaComentariosLeitor"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }
@@ -57,6 +58,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
                         composable(route = "telaCriarNotas") { telaCriarNotas(controleNavegacao) }
                         composable(route = "telaEscolherAvatar") { telaEscolherAvatar(controleNavegacao) }
+                        composable(route = "telaComentariosLeitor") { telaComentariosLeitor(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }

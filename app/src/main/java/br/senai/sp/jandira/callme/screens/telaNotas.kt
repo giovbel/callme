@@ -303,97 +303,113 @@ fun telaNotas(controleNavegacao: NavHostController) {
                         shape = RoundedCornerShape(7.dp)
                     ) {
                         Text(
-                            text = "Voltar",
+                            text = "Responder Nota",
                             color = Color.White,
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 14.sp
                         )
                     }
                 }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+
+                Box(
+                    modifier = Modifier
+                        .height(70.dp)
+                        .fillMaxWidth()
+                        .background(
+                            Brush.horizontalGradient(
+                                colors = listOf(
+                                    Color(0xFF213787),
+                                    Color(0xFF245FB0),
+                                    Color(0xFF6E96E8)
+                                )
+                            ),
+                        )
                 ) {
-                    Button(
-                        onClick = {
-
-                        },
-                        modifier = Modifier
-                            .size(72.dp)
-                            .background(Color.Transparent),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.calendarioicon),
-                            contentDescription = "",
-                            modifier = Modifier.size(60.dp)
-                        )
+                        Button(
+                            onClick = {
 
-                    }
-                    Button(
-                        onClick = {
+                            },
+                            modifier = Modifier
+                                .size(72.dp)
+                                .background(Color.Transparent),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.calendarioicon),
+                                contentDescription = "",
+                                modifier = Modifier.size(60.dp)
+                            )
 
-                        },
-                        modifier = Modifier
-                            .size(72.dp)
-                            .background(Color.Transparent),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.chaticon),
-                            contentDescription = "",
-                            modifier = Modifier.size(60.dp)
-                        )
+                        }
+                        Button(
+                            onClick = {
 
-                    }
-                    Button(
-                        onClick = {
+                            },
+                            modifier = Modifier
+                                .size(72.dp)
+                                .background(Color.Transparent),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.chaticon),
+                                contentDescription = "",
+                                modifier = Modifier.size(60.dp)
+                            )
 
-                        },
-                        modifier = Modifier
-                            .size(72.dp)
-                            .background(Color.Transparent),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.diarioicon),
-                            contentDescription = "",
-                            modifier = Modifier.size(60.dp)
-                        )
+                        }
+                        Button(
+                            onClick = {
 
-                    }
-                    Button(
-                        onClick = {
+                            },
+                            modifier = Modifier
+                                .size(72.dp)
+                                .background(Color.Transparent),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.diarioicon),
+                                contentDescription = "",
+                                modifier = Modifier.size(60.dp)
+                            )
 
-                        },
-                        modifier = Modifier
-                            .size(72.dp)
-                            .background(Color.Transparent),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.autoajuda),
-                            contentDescription = "",
-                            modifier = Modifier.size(60.dp)
-                        )
+                        }
+                        Button(
+                            onClick = {
 
-                    }
-                    Button(
-                        onClick = {
+                            },
+                            modifier = Modifier
+                                .size(72.dp)
+                                .background(Color.Transparent),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.autoajuda),
+                                contentDescription = "",
+                                modifier = Modifier.size(60.dp)
+                            )
 
-                        },
-                        modifier = Modifier
-                            .size(72.dp)
-                            .background(Color.Transparent),
-                        colors = ButtonDefaults.buttonColors(Color.Transparent)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.doacaoicon),
-                            contentDescription = "",
-                            modifier = Modifier.size(60.dp)
-                        )
+                        }
+                        Button(
+                            onClick = {
 
+                            },
+                            modifier = Modifier
+                                .size(72.dp)
+                                .background(Color.Transparent),
+                            colors = ButtonDefaults.buttonColors(Color.Transparent)
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.doacaoicon),
+                                contentDescription = "",
+                                modifier = Modifier.size(60.dp)
+                            )
+
+                        }
                     }
                 }
             }

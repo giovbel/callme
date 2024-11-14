@@ -203,15 +203,15 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
 
                                 BasicTextField(
                                     value = nota,
-                                    onValueChange = { /* ação ao mudar o valor */ },
+                                    onValueChange = { },
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .background(Color.Transparent), // Define o fundo como transparente
+                                        .background(Color.Transparent),
                                     decorationBox = { innerTextField ->
                                         if (nota.isEmpty()) {
                                             Text("Digite sua nota aqui...", color = Color.Gray)
                                         }
-                                        innerTextField() // Insere o campo de texto
+                                        innerTextField()
                                     }
                                 )
 
