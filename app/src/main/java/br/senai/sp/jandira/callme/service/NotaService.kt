@@ -8,9 +8,14 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.POST
 
 interface NotaService {
-
     @GET("notas?excluidas=false")
     fun getNotas(): Call<NotasResponse>
+
+
+    @Headers("Content-Type: application/json")
+    @POST("nota")  // Corrigido para a URL correta
+    fun adicionarNota(@Body nota: Postagem): Call<NotasResponse>
 }

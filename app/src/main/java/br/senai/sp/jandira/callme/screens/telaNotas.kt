@@ -239,8 +239,8 @@ fun telaNotas(controleNavegacao: NavHostController) {
                             shape = RoundedCornerShape(30.dp)
                         ) {
                             Box(modifier = Modifier.fillMaxSize()) {
-                                val profilePainter: Painter = if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario.foto.isNullOrEmpty()) {
-                                    rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario.foto)
+                                val profilePainter: Painter = if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario?.foto.isNullOrEmpty()) {
+                                    rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario?.foto)
                                 } else {
                                     painterResource(id = R.drawable.perfilcomum)
                                 }

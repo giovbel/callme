@@ -15,6 +15,8 @@ object RetrofitFactory {
     fun getClienteService(): ClienteService {
         return retrofit.create(ClienteService::class.java)
     }
+
+    // Serviço para as Notas
     fun getNotasService(): NotaService {
         return retrofit.create(NotaService::class.java)
     }

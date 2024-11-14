@@ -19,7 +19,7 @@ import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaCadastro
 import br.senai.sp.jandira.callme.screens.telaChatList
-import br.senai.sp.jandira.callme.screens.telaCriarNotas
+import br.senai.sp.jandira.callme.screens.telaCriarNota
 import br.senai.sp.jandira.callme.screens.telaDiario
 import br.senai.sp.jandira.callme.screens.telaEscolherAvatar
 import br.senai.sp.jandira.callme.screens.telaLogin
@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaComentariosLeitor"
+                        startDestination = "telaCriarNota"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }
@@ -56,7 +56,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaCategoria") { telaCategoria(controleNavegacao) }
                         composable(route = "telaCriarPostDiario") { telaCriarPostDiario(controleNavegacao) }
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
-                        composable(route = "telaCriarNotas") { telaCriarNotas(controleNavegacao) }
+                        composable(route = "telaCriarNota") { telaCriarNota(controleNavegacao) }
                         composable(route = "telaEscolherAvatar") { telaEscolherAvatar(controleNavegacao) }
                         composable(route = "telaComentariosLeitor") { telaComentariosLeitor(controleNavegacao) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)

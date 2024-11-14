@@ -178,14 +178,14 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
             shape = RoundedCornerShape(0.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.voltar ),
-                contentDescription = "",
-                modifier = Modifier
-                    .size(35.dp)
-                    .zIndex(12f)
-                    .offset(y = 20.dp, x = 10.dp)
-            )
+//            Image(
+//                painter = painterResource(id = R.drawable.voltar),
+//                contentDescription = "",
+//                modifier = Modifier
+//                    .size(35.dp)
+//                    .zIndex(12f)
+//                    .offset(y = 20.dp, x = 10.dp)
+//            )
 
             Column {
                 Row(
@@ -278,8 +278,8 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                         ) {
                             Box(modifier = Modifier.fillMaxSize()) {
                                 val profilePainter: Painter =
-                                    if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario.foto.isNullOrEmpty()) {
-                                        rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario.foto)
+                                    if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario?.foto.isNullOrEmpty()) {
+                                        rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario?.foto)
                                     } else {
                                         painterResource(id = R.drawable.perfilcomum)
                                     }

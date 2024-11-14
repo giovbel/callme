@@ -7,12 +7,14 @@ data class NotasResponse(
 )
 
 data class Postagem(
-    val id: Int,
-    val conteudo: String,
-    val data_postagem: String,
-    val deletada: Int,
-    val usuario: Usuario,
-    val respostas: List<Resposta>
+    val id: Int=0,
+    val conteudo: String="",
+    val data_postagem: String="",
+    val deletada: Int=0,
+    val usuario: Usuario?=null,
+    val respostas: List<Resposta>?=null,
+    val idUsuario: Int=0
+
 )
 
 data class Usuario(

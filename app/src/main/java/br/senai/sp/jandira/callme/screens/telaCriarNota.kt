@@ -1,70 +1,56 @@
 package br.senai.sp.jandira.callme.screens
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
+import br.senai.sp.jandira.callme.model.NotasResponse
+import br.senai.sp.jandira.callme.model.Postagem
+import br.senai.sp.jandira.callme.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
-fun telaCriarNotas(controleNavegacao: NavHostController) {
-
-    val nota by remember { mutableStateOf("") }
+fun telaCriarNota(controleNavegacao: NavHostController) {
+    var nota by remember { mutableStateOf(TextFieldValue("")) }
+    val context = LocalContext.current
+    val notaService =RetrofitFactory.getNotasService()
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxHeight()
+            .fillMaxWidth()
     ) {
         Box(
             modifier = Modifier
@@ -88,7 +74,6 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-
                 Image(
                     painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
@@ -107,16 +92,13 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                         .size(50.dp)
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
-                ) {
-
-                }
+                ) {}
             }
-
         }
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(630.dp)
+                .height(775.dp)
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
@@ -134,12 +116,13 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
         ) {
             Column {
                 Row(
-                    modifier = Modifier.fillMaxWidth().height(500.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(600.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-
-
+                    IconButton(onClick = { }, modifier = Modifier.padding(start = 16.dp)) {}
 
                     Box(
                         modifier = Modifier
@@ -151,10 +134,7 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                                 .height(255.dp)
                                 .width(276.dp)
                                 .align(Alignment.Center)
-                                .offset(x = -10.dp)
-                                .graphicsLayer {
-                                    rotationZ = -10f
-                                }
+                                .graphicsLayer { rotationZ = -10f }
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFBCDDFF))
@@ -165,25 +145,19 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                                     .width(210.dp)
                                     .align(Alignment.End),
                                 colors = CardDefaults.cardColors(Color(0xFF90C6FF))
-                            ) {
-
-                            }
+                            ) {}
                         }
                         Card(
                             modifier = Modifier
                                 .height(250.dp)
                                 .width(280.dp)
                                 .align(Alignment.Center)
-                                .offset(y = 20.dp,  x = 25.dp)
-                                .graphicsLayer {
-                                    rotationZ = -12f
-                                }
+                                .offset(y = 20.dp, x = 25.dp)
+                                .graphicsLayer { rotationZ = -12f }
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFFFFFD2))
-                        ) {
-
-                        }
+                        ) {}
                         Card(
                             modifier = Modifier
                                 .height(260.dp)
@@ -196,70 +170,67 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .fillMaxHeight().padding(start = 20.dp, end = 20.dp)
-                                ,
+                                    .fillMaxHeight()
+                                    .padding(start = 20.dp, end = 20.dp),
                                 contentAlignment = Alignment.Center
                             ) {
-
                                 BasicTextField(
                                     value = nota,
-                                    onValueChange = { },
+                                    onValueChange = { newText -> nota = newText },
                                     modifier = Modifier
                                         .fillMaxWidth()
+                                        .padding(8.dp)
                                         .background(Color.Transparent),
                                     decorationBox = { innerTextField ->
-                                        if (nota.isEmpty()) {
+                                        if (nota.text.isEmpty()) {
                                             Text("Digite sua nota aqui...", color = Color.Gray)
                                         }
                                         innerTextField()
                                     }
                                 )
-
                             }
                         }
 
                         Image(
                             painter = painterResource(id = R.drawable.macallmeanotando),
                             contentDescription = "",
-                            modifier = Modifier.size(150.dp).zIndex(12f).offset(y = 27.dp, x = -32.dp),
+                            modifier = Modifier
+                                .size(150.dp)
+                                .zIndex(12f)
+                                .offset(y = 70.dp, x = -32.dp),
                         )
-                        Card (
-                            modifier = Modifier.height(55.dp).width(55.dp).offset(y = 97.dp, x = 195.dp)
+                        Card(
+                            modifier = Modifier
+                                .height(55.dp)
+                                .width(55.dp)
+                                .offset(y = 140.dp, x = 210.dp)
                                 .border(3.dp, Color(0xFF020075), RoundedCornerShape(30.dp)),
-                            RoundedCornerShape(30.dp)
-                        ){
-
-                        }
+                            shape = RoundedCornerShape(30.dp)
+                        ) {}
                     }
 
-
-
-
-                    IconButton(
-                        onClick = {  },
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.ArrowForward,
-                            contentDescription = "Avançar",
-                            tint = Color(0xFF213787),
-                            modifier = Modifier.size(48.dp)
-                        )
-                    }
-
+                    IconButton(onClick = { }) {}
                 }
-                Row (
-                    modifier = Modifier.fillMaxWidth().height(100.dp),
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(100.dp),
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFFFFFFF5)),
-                        onClick = {}, modifier = Modifier
+                        onClick = {
+                            // Ação para descartar a nota
+                            nota = TextFieldValue("")
+                            Toast.makeText(context, "Nota descartada", Toast.LENGTH_SHORT).show()
+                        },
+                        modifier = Modifier
                             .height(50.dp)
-                            .width(160.dp).border(2.dp, Color(0xFF020075), RoundedCornerShape(5.dp)),
-                        shape = RoundedCornerShape(7.dp))
-
-                    {
+                            .width(160.dp)
+                            .border(2.dp, Color(0xFF020075), RoundedCornerShape(5.dp)),
+                        shape = RoundedCornerShape(7.dp)
+                    ) {
                         Text(
                             text = "Descartar",
                             textAlign = TextAlign.Center,
@@ -267,19 +238,37 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                             color = Color(0xFF1252AF),
                             fontSize = 15.sp
                         )
-
                     }
-
-
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = {}, modifier = Modifier
+                        onClick = {
+                            if (nota.text.isNotEmpty()) {
+                                val novaNota = Postagem(conteudo = nota.text, idUsuario = 2) // Ajuste o ID conforme necessário
+Log.i("calma",novaNota.toString())
+                                notaService.adicionarNota(novaNota).enqueue(object : Callback<NotasResponse> {
+                                    override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
+                                        if (response.isSuccessful) {
+                                            Toast.makeText(context, "Nota adicionada com sucesso!", Toast.LENGTH_SHORT).show()
+                                            controleNavegacao.navigate("telaNotas")
+                                        } else {
+                                            Toast.makeText(context, "Erro ao adicionar nota.", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<NotasResponse>, t: Throwable) {
+                                        Toast.makeText(context, "Falha na comunicação com o servidor.", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+                            } else {
+                                Toast.makeText(context, "A nota não pode estar vazia.", Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
-                        shape = RoundedCornerShape(7.dp))
-
-                    {
+                        shape = RoundedCornerShape(7.dp)
+                    ) {
                         Text(
                             text = "Postar nota",
                             textAlign = TextAlign.Center,
@@ -289,113 +278,12 @@ fun telaCriarNotas(controleNavegacao: NavHostController) {
                         )
                         Image(
                             painter = painterResource(id = R.drawable.send),
-                            contentDescription = "",
-                            modifier = Modifier.size(30.dp).offset(18.dp)
+                            contentDescription = "Enviar nota",
+                            modifier = Modifier
+                                .size(24.dp)
+                                .padding(start = 8.dp)
                         )
                     }
-                }
-            }
-
-        }
-
-        Box(
-            modifier = Modifier
-                .height(70.dp)
-                .fillMaxWidth()
-                .background(
-                    Brush.horizontalGradient(
-                        colors = listOf(
-                            Color(0xFF213787),
-                            Color(0xFF245FB0),
-                            Color(0xFF6E96E8)
-                        )
-                    ),
-                )
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.calendarioicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
-
-                }
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.chaticon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
-
-                }
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.diarioicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
-
-                }
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.autoajuda),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
-
-                }
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.doacaoicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
-
                 }
             }
         }
