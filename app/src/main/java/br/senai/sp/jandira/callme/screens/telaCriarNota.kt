@@ -219,27 +219,7 @@ fun telaCriarNota(controleNavegacao: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Button(
-                        colors = ButtonDefaults.buttonColors(Color(0xFFFFFFF5)),
-                        onClick = {
-                            // Ação para descartar a nota
-                            nota = TextFieldValue("")
-                            Toast.makeText(context, "Nota descartada", Toast.LENGTH_SHORT).show()
-                        },
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(160.dp)
-                            .border(2.dp, Color(0xFF020075), RoundedCornerShape(5.dp)),
-                        shape = RoundedCornerShape(7.dp)
-                    ) {
-                        Text(
-                            text = "Descartar",
-                            textAlign = TextAlign.Center,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF1252AF),
-                            fontSize = 15.sp
-                        )
-                    }
+                   
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),

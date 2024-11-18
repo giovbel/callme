@@ -296,7 +296,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { controleNavegacao.popBackStack() },
+                        onClick = { controleNavegacao.navigate("telaComentariosLeitor") },
                         modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),
@@ -348,7 +348,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                         }
                         Button(
                             onClick = {
-
+                               controleNavegacao.navigate("landingPageChat")
                             },
                             modifier = Modifier
                                 .size(72.dp)
@@ -363,8 +363,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
 
                         }
                         Button(
-                            onClick = {
-
+                            onClick = {controleNavegacao.navigate("telaDiario")
                             },
                             modifier = Modifier
                                 .size(72.dp)

@@ -17,6 +17,6 @@ interface NotaService {
 
 
     @Headers("Content-Type: application/json")
-    @POST("nota")  // Corrigido para a URL correta
+    @POST("nota")
     fun adicionarNota(@Body nota: Postagem): Call<NotaResponse>
 }
