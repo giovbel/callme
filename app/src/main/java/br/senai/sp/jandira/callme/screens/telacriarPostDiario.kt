@@ -94,7 +94,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
             ) {
 
                 Image(
-                    painter = painterResource(id = R.drawable.logo),
+                    painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
                     modifier = Modifier
                         .height(60.dp)
@@ -117,13 +117,14 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
             }
 
         }
+
         Column(
             modifier = Modifier.align(Alignment.CenterHorizontally),
         ) {
             Card(
                 modifier = Modifier
-                    .width(350.dp)
-                    .height(570.dp)
+                    .width(380.dp)
+                    .height(700.dp)
                     .align(Alignment.CenterHorizontally),
                 colors = CardDefaults.cardColors(Color(0xFFC1DBFF)),
             ) {
@@ -179,8 +180,8 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                     ) {
                         Card(
                             modifier = Modifier
-                                .width(330.dp)
-                                .height(300.dp),
+                                .width(350.dp)
+                                .height(310.dp),
                             colors = CardDefaults.cardColors(Color(0xFFE4EFFF)),
                         ) {
                             BasicTextField(
@@ -188,7 +189,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                                 onValueChange = { },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(Color.Transparent),
+                                    .background(Color.Transparent).padding(16.dp),
                                 decorationBox = { innerTextField ->
                                     if (conteudo.isEmpty()) {
                                         Text("Cada página em branco é uma oportunidade de se expressar. Vamos começar?", color = Color.Gray)
@@ -198,8 +199,17 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                             )
                         }
                     }
+
                 }
+                Text(
+                    text = "Como você está hoje?",
+                    fontSize = 20.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Medium
+                )
+
             }
+
         }
 
 

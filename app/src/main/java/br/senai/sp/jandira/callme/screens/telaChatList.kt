@@ -55,7 +55,7 @@ fun telaChatList(controleNavegacao: NavHostController) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.logo),
+                    painter = painterResource(id = R.drawable.logo2),
                     contentDescription = "",
                     modifier = Modifier
                         .height(60.dp)
