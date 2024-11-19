@@ -45,6 +45,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,8 +59,7 @@ import java.util.Locale
 @Composable
 fun telaCriarPostDiario(controleNavegacao: NavHostController) {
 
-
-    val conteudo by remember { mutableStateOf("") }
+    var conteudo by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("Título") }
     var isFocused by remember { mutableStateOf(false) }
     val currentDate = SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(Date())
@@ -132,7 +132,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(10.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -140,7 +140,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                         value = if (isFocused && title == "Título") "" else title,
                         onValueChange = { title = it },
                         textStyle = LocalTextStyle.current.copy(
-                            fontSize = 20.sp,
+                            fontSize = 25.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         ),
@@ -155,7 +155,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                             unfocusedContainerColor = Color.Transparent,
                             disabledContainerColor = Color.Transparent,
                             focusedIndicatorColor = Color.Transparent,
-                            focusedLabelColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
                             errorContainerColor = Color.Transparent
                         )
                     )
@@ -168,45 +168,86 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                     )
                 }
 
-                Box(
-                    modifier = Modifier.fillMaxSize()
-                ) {
 
-                    Column(
+                Column(
+                    modifier = Modifier
+                        .height(370.dp)
+                        .padding(start = 15.dp),
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    horizontalAlignment = Alignment.CenterHorizontally  // Centraliza os itens horizontalmente
+                ) {
+                    Card(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.SpaceBetween
+                            .width(350.dp)
+                            .height(300.dp),
+                        colors = CardDefaults.cardColors(Color(0xFFE4EFFF)),
                     ) {
-                        Card(
+                        BasicTextField(
+                            value = conteudo,
+                            onValueChange = { novoValor ->
+                                conteudo = novoValor
+                            },
                             modifier = Modifier
-                                .width(350.dp)
-                                .height(310.dp),
-                            colors = CardDefaults.cardColors(Color(0xFFE4EFFF)),
-                        ) {
-                            BasicTextField(
-                                value = conteudo,
-                                onValueChange = { },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(Color.Transparent).padding(16.dp),
-                                decorationBox = { innerTextField ->
-                                    if (conteudo.isEmpty()) {
-                                        Text("Cada página em branco é uma oportunidade de se expressar. Vamos começar?", color = Color.Gray)
-                                    }
-                                    innerTextField()
+                                .fillMaxWidth()
+                                .background(Color.Transparent)
+                                .padding(16.dp),
+                            decorationBox = { innerTextField ->
+                                if (conteudo.isEmpty()) {
+                                    Text(
+                                        "Cada página em branco é uma oportunidade de se expressar. Vamos começar?",
+                                        color = Color.Gray
+                                    )
                                 }
-                            )
-                        }
+                                innerTextField()
+                            }
+                        )
                     }
 
+                    Text(
+                        text = "Como você está hoje?",
+                        fontSize = 20.sp,
+                        color = Color(0xFF2755B2),
+                        fontWeight = FontWeight.Medium,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.emojifeliz),
+                            contentDescription = "",
+                            modifier = Modifier.height(60.dp).width(60.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.emojiok),
+                            contentDescription = "",
+                            modifier = Modifier.height(60.dp).width(60.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.emojineutro),
+                            contentDescription = "",
+                            modifier = Modifier.height(37.dp).width(37.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.emojitriste),
+                            contentDescription = "",
+                            modifier = Modifier.height(37.dp).width(37.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.emojichorando),
+                            contentDescription = "",
+                            modifier = Modifier.height(60.dp).width(60.dp)
+                        )
+                    }
                 }
-                Text(
-                    text = "Como você está hoje?",
-                    fontSize = 20.sp,
-                    color = Color.White,
-                    fontWeight = FontWeight.Medium
-                )
+
+
+
+
+
 
             }
 
