@@ -17,7 +17,9 @@ import br.senai.sp.jandira.callme.screens.landingPageChat
 import br.senai.sp.jandira.callme.screens.landingPageDois
 import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
+import br.senai.sp.jandira.callme.screens.telaAutojuda
 import br.senai.sp.jandira.callme.screens.telaCadastro
+import br.senai.sp.jandira.callme.screens.telaChatConversa
 import br.senai.sp.jandira.callme.screens.telaChatList
 import br.senai.sp.jandira.callme.screens.telaChatPsicologo
 import br.senai.sp.jandira.callme.screens.telaCriarNota
@@ -45,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaComentariosLeitor"
+                        startDestination = "telaChatConversa"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }
@@ -64,6 +66,8 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaComentariosLeitor") { telaComentariosLeitor(controleNavegacao) }
                         composable(route = "telaPerfil") { telaPerfil(controleNavegacao) }
                         composable(route = "telaChatPsicologo") { telaChatPsicologo(controleNavegacao) }
+                        composable(route = "telaAutoajuda") { telaAutojuda(controleNavegacao) }
+                        composable(route = "telaChatConversa") {telaChatConversa(controleNavegacao)}
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }
