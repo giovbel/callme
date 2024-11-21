@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,9 +35,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -47,6 +51,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.focus.FocusState
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -55,6 +61,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -80,6 +87,8 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
     var loadingNotas by remember { mutableStateOf(true) }
     val context = LocalContext.current
     val notaService = RetrofitFactory.getNotasService()
+    var conteudo by remember { mutableStateOf("") }
+    var isFocused by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
         notaService.getNotas().enqueue(object : Callback<NotasResponse> {
@@ -305,27 +314,216 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                     }
                 }
 
-                Card (
-                    modifier = Modifier.fillMaxWidth().height(300.dp).background(Color(0xFFBDD8FF))
-                ){
+                //COMENTÁRIOS
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .border(1.dp, Color.Black, RoundedCornerShape(10.dp))
+                        .height(350.dp),
+                    colors = CardDefaults.cardColors(Color(0xFFBDD8FF))
+                ) {
                     Box(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(50.dp)
-                            .clip(RoundedCornerShape(20.dp))
-                            .border(1.dp, Color.Black, RoundedCornerShape(20.dp))
-                            .background(Color(0xFFFFFFF5))
+                            .width(400.dp)
+                            .height(70.dp)
+                            .padding(top = 10.dp, start = 10.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
+                            .background(Color(0xFFFFFFFF))
                     ) {
-                        Row (){
-                            Card (
-                                modifier = Modifier.height(40.dp).width(40.dp).clip(RoundedCornerShape(20.dp))
-                                    .border(2.dp, Color.Black, RoundedCornerShape(20.dp))
-                            ){
+                        Row(
+                            modifier = Modifier.fillMaxHeight().fillMaxWidth().padding(start = 10.dp, end = 10.dp),
+                            horizontalArrangement = Arrangement.SpaceAround,
+                            verticalAlignment = Alignment.CenterVertically
+
+                        ) {
+
+                            Card(
+                                modifier = Modifier
+                                    .height(40.dp)
+                                    .width(40.dp)
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
+                                    .background(Color(0xFFFFFFFF)),
+                            ) {
+                            }
+
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            BasicTextField(
+                                value = conteudo,
+                                onValueChange = { novoValor ->
+                                    conteudo = novoValor
+                                },
+                                modifier = Modifier
+                                    .fillMaxWidth(0.8f)
+                                    .background(Color.Transparent),
+                                decorationBox = { innerTextField ->
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        if (conteudo.isEmpty()) {
+                                            Text(
+                                                "Digite seu comentário",
+                                                color = Color.Gray,
+                                                modifier = Modifier
+                                                    .align(Alignment.CenterStart)
+                                            )
+                                        }
+                                        innerTextField()
+                                    }
+                                }
+                            )
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Image(
+                                painter = painterResource(id = R.drawable.send),
+                                contentDescription = "Enviar",
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+
+                    }
+
+
+                    Box(
+                        modifier = Modifier
+                            .width(400.dp)
+                            .height(110.dp)
+                            .padding(top = 10.dp, start = 10.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
+                            .background(Color(0xFFFFFFFF))
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            // Card
+                            Card(
+                                modifier = Modifier
+                                    .height(40.dp)
+                                    .width(40.dp)
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
+                                    .background(Color(0xFFFFFFFF)),
+                            ) {
 
                             }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo",
+                                textAlign = TextAlign.Start,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                lineHeight = 14.sp,
+                                color = Color(0xFF2754B2)
+                            )
                         }
+
+
+                    }
+                    Box(
+                        modifier = Modifier
+                            .width(400.dp)
+                            .height(110.dp)
+                            .padding(top = 10.dp, start = 10.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
+                            .background(Color(0xFFFFFFFF))
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            // Card
+                            Card(
+                                modifier = Modifier
+                                    .height(40.dp)
+                                    .width(40.dp)
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
+                                    .background(Color(0xFFFFFFFF)),
+                            ) {
+
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "So my fiancé(F34)  about 9 mo",
+                                textAlign = TextAlign.Start,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                lineHeight = 14.sp,
+                                color = Color(0xFF2754B2)
+                            )
+                        }
+
+
+
+                    }
+                    Box(
+                        modifier = Modifier
+                            .width(400.dp)
+                            .height(110.dp)
+                            .padding(top = 10.dp, start = 10.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
+                            .background(Color(0xFFFFFFFF))
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxHeight()
+                                .fillMaxWidth()
+                                .padding(12.dp),
+                            horizontalArrangement = Arrangement.Start,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+
+                            Card(
+                                modifier = Modifier
+                                    .height(40.dp)
+                                    .width(40.dp)
+                                    .clip(RoundedCornerShape(20.dp))
+                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
+                                    .background(Color(0xFFFFFFFF)),
+                            ) {
+
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "So my fiancé(F34)  about 9 mo",
+                                textAlign = TextAlign.Start,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold,
+                                lineHeight = 14.sp,
+                                color = Color(0xFF2754B2)
+                            )
+                        }
+
+
+
                     }
                 }
+
+
+
 
 
             }

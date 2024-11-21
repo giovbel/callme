@@ -280,7 +280,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 ) {
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
-                        onClick = { controleNavegacao.navigate("telaCriarNotas") },
+                        onClick = { controleNavegacao.navigate("telaCriarNota") },
                         modifier = Modifier
                             .height(50.dp)
                             .width(160.dp),

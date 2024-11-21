@@ -174,7 +174,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                         .height(370.dp)
                         .padding(start = 15.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.CenterHorizontally  // Centraliza os itens horizontalmente
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Card(
                         modifier = Modifier

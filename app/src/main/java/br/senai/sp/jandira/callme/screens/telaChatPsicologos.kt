@@ -100,7 +100,7 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(630.dp)
+                .height(780.dp)
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
@@ -176,6 +176,14 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                     shape = RoundedCornerShape(10.dp),
                     colors = CardDefaults.cardColors(Color.Transparent)
                 ){
+                    Column {
+                        Text(
+                            text = "Atendimento em casos de crise",
+                            fontSize = 15.sp,
+                            color = Color(0xFF093C7D),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
 
                 }
 
