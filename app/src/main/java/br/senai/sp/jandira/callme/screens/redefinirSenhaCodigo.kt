@@ -74,7 +74,6 @@ fun redefinirSenhaCodigo(controleNavegacao: NavHostController) {
                     fontWeight = FontWeight.SemiBold,
                 )
 
-                // Campo de Código
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -114,13 +113,14 @@ fun redefinirSenhaCodigo(controleNavegacao: NavHostController) {
                             ),
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = Color.Transparent,
-                                focusedBorderColor = Color.Transparent
-                            )
+                                focusedBorderColor = Color.Transparent,
+                            ),
+                            modifier = Modifier
+                                .background(Color.White)
                         )
                     }
                 }
 
-                // Campo de Senha
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -158,12 +158,13 @@ fun redefinirSenhaCodigo(controleNavegacao: NavHostController) {
                             colors = OutlinedTextFieldDefaults.colors(
                                 unfocusedBorderColor = Color.Transparent,
                                 focusedBorderColor = Color.Transparent
-                            )
+                            ),
+                            modifier = Modifier
+                                .background(Color.White)
                         )
                     }
                 }
 
-                // Mensagem de erro
                 if (mensagemErroState.isNotEmpty()) {
                     Text(
                         text = mensagemErroState,
@@ -179,7 +180,7 @@ fun redefinirSenhaCodigo(controleNavegacao: NavHostController) {
                         if (codigoState1 != codigoCorreto) {
                             mensagemErroState = "Código incorreto! Talvez tenha se confundido."
                         } else {
-                            mensagemErroState = "" // Limpa a mensagem se o código estiver correto
+                            mensagemErroState = ""
                         }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2755B2)),
