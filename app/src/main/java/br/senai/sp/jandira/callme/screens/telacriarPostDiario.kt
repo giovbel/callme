@@ -42,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -63,6 +64,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
     var title by remember { mutableStateOf("Título") }
     var isFocused by remember { mutableStateOf(false) }
     val currentDate = SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(Date())
+    var selectedImage by remember { mutableStateOf<Int?>(null) }
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -171,7 +173,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
 
                 Column(
                     modifier = Modifier
-                        .height(370.dp)
+                        .fillMaxHeight()
                         .padding(start = 15.dp),
                     verticalArrangement = Arrangement.SpaceBetween,
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -203,45 +205,150 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                         )
                     }
 
-                    Text(
-                        text = "Como você está hoje?",
-                        fontSize = 20.sp,
-                        color = Color(0xFF2755B2),
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center
-                    )
+                    Column (
+                        modifier = Modifier
+                            .padding(top = 12.dp)
+                            .fillMaxHeight()
+                            .fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceAround
+                    ){
+                        Column {
+                            Text(
+                                text = "Como você está hoje?",
+                                fontSize = 20.sp,
+                                color = Color(0xFF2755B2),
+                                fontWeight = FontWeight.Medium,
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(bottom = 20.dp),
+                                textAlign = TextAlign.Center
+                            )
 
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.emojifeliz),
-                            contentDescription = "",
-                            modifier = Modifier.height(60.dp).width(60.dp)
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.emojiok),
-                            contentDescription = "",
-                            modifier = Modifier.height(60.dp).width(60.dp)
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.emojineutro),
-                            contentDescription = "",
-                            modifier = Modifier.height(37.dp).width(37.dp)
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.emojitriste),
-                            contentDescription = "",
-                            modifier = Modifier.height(37.dp).width(37.dp)
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.emojichorando),
-                            contentDescription = "",
-                            modifier = Modifier.height(60.dp).width(60.dp)
-                        )
+                            Column(
+                                modifier = Modifier.fillMaxSize(),
+                                verticalArrangement = Arrangement.SpaceBetween, // Espaço entre os elementos
+                                horizontalAlignment = Alignment.CenterHorizontally // Centraliza na horizontal
+                            ) {
+                                // Área superior: Imagens
+                                if (selectedImage == null) {
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.Center,
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = R.drawable.emojifeliz),
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(60.dp)
+                                                .padding(horizontal = 8.dp)
+                                                .clickable {
+                                                    selectedImage = R.drawable.emojifeliz
+                                                }
+                                        )
+                                        Image(
+                                            painter = painterResource(id = R.drawable.emojiok),
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(60.dp)
+                                                .padding(horizontal = 8.dp)
+                                                .clickable {
+                                                    selectedImage = R.drawable.emojiok
+                                                }
+                                        )
+                                        Image(
+                                            painter = painterResource(id = R.drawable.emojineutro),
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(60.dp)
+                                                .padding(horizontal = 8.dp)
+                                                .clickable {
+                                                    selectedImage = R.drawable.emojineutro
+                                                }
+                                        )
+                                        Image(
+                                            painter = painterResource(id = R.drawable.emojitriste),
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(60.dp)
+                                                .padding(horizontal = 8.dp)
+                                                .clickable {
+                                                    selectedImage = R.drawable.emojitriste
+                                                }
+                                        )
+                                        Image(
+                                            painter = painterResource(id = R.drawable.emojichorando),
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .size(60.dp)
+                                                .padding(horizontal = 8.dp)
+                                                .clickable {
+                                                    selectedImage = R.drawable.emojichorando
+                                                }
+                                        )
+                                    }
+                                } else {
+                                    Box(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Column(
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            verticalArrangement = Arrangement.Center
+                                        ) {
+                                            Image(
+                                                painter = painterResource(id = selectedImage!!),
+                                                contentDescription = "Imagem Selecionada",
+                                                modifier = Modifier
+                                                    .size(60.dp)
+                                                    .clickable {
+                                                        selectedImage =
+                                                            null
+                                                    }
+                                            )
+                                            Spacer(modifier = Modifier.height(16.dp))
+                                            Text(
+                                                text = "Clique na imagem para voltar",
+                                                fontSize = 14.sp,
+                                                color = Color.Gray
+                                            )
+                                        }
+                                    }
+                                }
+
+
+                                Card (
+                                    modifier = Modifier
+                                        .height(60.dp)
+                                        .fillMaxWidth()
+                                        .align(Alignment.CenterHorizontally)
+                                        .padding(start = 12.dp, end = 12.dp, bottom = 10.dp),
+                                    colors = CardDefaults.cardColors(Color(0xFF1F55C6)),
+                                    shape = RoundedCornerShape(6.dp),
+                                ){
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(100.dp),
+                                        contentAlignment = Alignment.Center
+                                    ){
+                                        Text(
+                                            text = "Salvar",
+                                            fontSize = 24.sp,
+                                            color = Color.White,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                    }
+
+                                }
+                        }
+                        }
+
+
+
                     }
+                    
                 }
 
 
