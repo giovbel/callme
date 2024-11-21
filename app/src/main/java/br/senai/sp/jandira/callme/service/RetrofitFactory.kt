@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 object RetrofitFactory {
 
-    private const val BASE_URL = "http://10.107.140.88:3000/v1/callme/"
+    private const val BASE_URL = "http://10.0.2.2:3000/v1/callme/"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
