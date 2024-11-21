@@ -120,6 +120,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                 )
                 Card(
                     modifier = Modifier
+                        .clickable { controleNavegacao.navigate("telaPerfil")}
                         .size(50.dp)
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
