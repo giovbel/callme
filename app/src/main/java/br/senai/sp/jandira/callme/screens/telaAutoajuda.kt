@@ -16,13 +16,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,6 +37,7 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -41,6 +48,10 @@ import br.senai.sp.jandira.callme.R
 
 @Composable
 fun telaAutojuda(controleNavegacao: NavHostController) {
+
+    var conteudo by remember { mutableStateOf("") }
+
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -106,15 +117,43 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                colors = CardDefaults.cardColors(Color(0xFFF2F5F8)),
            ){
                Row (
-
+                   modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(12.dp),
+                   verticalAlignment = Alignment.CenterVertically,
+                   horizontalArrangement = Arrangement.SpaceBetween
                ){
-                   Text(
-                       text =  "O que você procura?",
-                       fontSize = 18.sp,
-                       color = Color(0xFF5C8FDF),
-                       modifier = Modifier.fillMaxWidth(),
-                       textAlign = TextAlign.Start,
-                       fontWeight = FontWeight.Bold
+                   BasicTextField(
+                       value = conteudo,
+                       onValueChange = { novoValor ->
+                           conteudo = novoValor
+                       },
+                       modifier = Modifier
+                           .fillMaxWidth(0.8f)
+                           .background(Color.Transparent),
+                       decorationBox = { innerTextField ->
+                           Box(
+                               modifier = Modifier.fillMaxWidth()
+                           ) {
+                               if (conteudo.isEmpty()) {
+                                   Text(
+                                       "O que você procura?",
+                                       color = Color(0xFF97B3DF),
+                                       fontWeight = FontWeight.Bold,
+                                       modifier = Modifier
+                                           .align(Alignment.CenterStart)
+                                   )
+                               }
+                               innerTextField()
+                           }
+                       }
+                   )
+
+
+                   Image(
+                       painter = painterResource(id = R.drawable.searchicon),
+                       contentDescription = "",
+                       modifier = Modifier
+                           .height(25.dp)
+                           .width(25.dp)
                    )
                }
 
@@ -315,16 +354,57 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                 }
                 Spacer(modifier = Modifier.width(16.dp))
 
-                Card (
-                    modifier = Modifier
-                        .height(180.dp)
-                        .width(180.dp)
-                        .shadow(8.dp, RoundedCornerShape(10.dp), clip = false)
-                        .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
-                    colors = CardDefaults.cardColors(Color(0xFFF2F5F8)),
-                ){
+                Row {
+                    Card(
+                        modifier = Modifier
+                            .height(180.dp)
+                            .width(180.dp)
+                            .shadow(8.dp, RoundedCornerShape(10.dp), clip = false)
+                            .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Color(0xFFF2F5F8)),
+                    ) {
+                        Card(
+                            modifier = Modifier
+                                .height(90.dp)
+                                .fillMaxWidth()
+                                .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
+                            colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
+                        ) {
 
+                        }
+                        Column(
+                            modifier = Modifier.padding(start = 10.dp, top = 5.dp)
+                        ) {
+                            Column(
+                                modifier = Modifier.height(50.dp)
+                            ) {
+                                Text(
+                                    text = "Quero me assumir.",
+                                    color = Color(0xFF2754B2),
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+
+                            Row(
+                                modifier = Modifier
+                            ) {
+                                Card(
+                                    modifier = Modifier
+                                        .height(25.dp)
+                                        .width(25.dp)
+                                        .clip(RoundedCornerShape(100.dp))
+                                ) {
+
+                                }
+                                Spacer(modifier = Modifier.width(6.dp))
+
+                                Text(text = "Murilo Carolino", fontSize = 11.sp)
+                            }
+
+                        }
+                    }
                 }
+
             }
         }
 
