@@ -175,36 +175,53 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(700.dp)
+                    .padding(10.dp)
             ){
                 Box(
                     modifier = Modifier
-                        .height(60.dp)
-                        .width(200.dp)
-                        .shadow(8.dp, shape = RoundedCornerShape(10.dp))
-                        .border(2.dp, Color(0xFF4A6B9B), RoundedCornerShape(10.dp))
+                        .height(55.dp)
+                        .width(230.dp)
+                        .align(Alignment.End)
+                        .shadow(8.dp, shape = RoundedCornerShape(30.dp))
+                        .border(2.dp, Color(0xFF4A6B9B), RoundedCornerShape(30.dp)),
                 ) {
                     Card(
                         modifier = Modifier
                             .fillMaxSize(),
                         shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(Color(0xFF85A3DC))
+                        colors = CardDefaults.cardColors(Color(0xFF85A3DC)),
                     ) {
-                        Card(
-                            modifier = Modifier
-                                .size(50.dp)
-                                .border(2.dp, Color(0xFF0C3386), RoundedCornerShape(30.dp)),
-                            shape = RoundedCornerShape(100.dp),
+                        Row(
+                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
                         ) {
+                            Card(
+                                modifier = Modifier
+                                    .size(40.dp),
+                                shape = RoundedCornerShape(100.dp),
+                            ) {
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "A vida é muito triste",
+                                fontSize = 14.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
+
                 }
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Box(
                     modifier = Modifier
-                        .height(60.dp)
-                        .width(200.dp)
-                        .shadow(8.dp, shape = RoundedCornerShape(10.dp))
-                        .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(10.dp))
+                        .height(55.dp)
+                        .width(120.dp)
+                        .shadow(8.dp, shape = RoundedCornerShape(30.dp))
+                        .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(30.dp))
                 ) {
                     Card(
                         modifier = Modifier
@@ -212,16 +229,133 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                         shape = RoundedCornerShape(10.dp),
                         colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
                     ) {
+                        Row (
+                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Card(
+                                modifier = Modifier
+                                    .size(40.dp),
+                                shape = RoundedCornerShape(100.dp),
+                            ) {
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "Oii",
+                                fontSize = 14.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
 
                     }
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
+                    ) {
+                        Row (
+                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Card(
+                                modifier = Modifier
+                                    .size(40.dp),
+                                shape = RoundedCornerShape(100.dp),
+                            ) {
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "Oii",
+                                fontSize = 14.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                    }
+
                 }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Box(
+                    modifier = Modifier
+                        .height(55.dp)
+                        .width(120.dp)
+                        .shadow(8.dp, shape = RoundedCornerShape(30.dp))
+                        .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(30.dp))
+                ) {
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
+                    ) {
+                        Row (
+                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Card(
+                                modifier = Modifier
+                                    .size(40.dp),
+                                shape = RoundedCornerShape(100.dp),
+                            ) {
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "Oii",
+                                fontSize = 14.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                    }
+                    Card(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
+                    ) {
+                        Row (
+                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ){
+                            Card(
+                                modifier = Modifier
+                                    .size(40.dp),
+                                shape = RoundedCornerShape(100.dp),
+                            ) {
+                            }
+
+                            Spacer(modifier = Modifier.width(8.dp))
+
+                            Text(
+                                text = "Oii",
+                                fontSize = 14.sp,
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+
+                    }
+
+                }
+
 
 
 
             }
 
 
-            //footer
 
             Box(
                 modifier = Modifier
