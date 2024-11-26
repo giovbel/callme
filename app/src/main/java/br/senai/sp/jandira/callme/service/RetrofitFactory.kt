@@ -1,9 +1,7 @@
 package br.senai.sp.jandira.callme.service
 
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 object RetrofitFactory {
 
@@ -22,6 +20,7 @@ object RetrofitFactory {
         return retrofit.create(NotaService::class.java)
     }
 
-
-
+    fun getComentarioService(): ComentarioService {
+        return retrofit.create(ComentarioService::class.java)
+    }
 }

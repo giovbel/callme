@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaChatConversa"
+                        startDestination = "telaComentariosLeitor"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }

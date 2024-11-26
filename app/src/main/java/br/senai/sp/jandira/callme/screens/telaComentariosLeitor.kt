@@ -78,11 +78,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 @Composable
 fun telaComentariosLeitor(controleNavegacao: NavHostController) {
 
     var notas by remember { mutableStateOf<List<Postagem>>(emptyList()) }
+    var comentarios by remember { mutableStateOf<List<String>>(emptyList()) }
     var currentNoteIndex by remember { mutableStateOf(0) }
     var loadingNotas by remember { mutableStateOf(true) }
     val context = LocalContext.current
@@ -95,6 +95,7 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
             override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
                 if (response.isSuccessful) {
                     notas = response.body()?.dados?.take(10) ?: emptyList()
+                    comentarios = notas.flatMap { it.comentarios ?: listOf("Sem comentários") }
                     loadingNotas = false
                 } else {
                     Toast.makeText(
@@ -125,6 +126,7 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                 )
             )
     ) {
+        // Cabeçalho
         Box(
             modifier = Modifier
                 .height(70.dp)
@@ -169,8 +171,7 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
             }
         }
 
-
-
+        // Corpo da tela
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -187,15 +188,6 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
             shape = RoundedCornerShape(0.dp),
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
-//            Image(
-//                painter = painterResource(id = R.drawable.voltar),
-//                contentDescription = "",
-//                modifier = Modifier
-//                    .size(35.dp)
-//                    .zIndex(12f)
-//                    .offset(y = 20.dp, x = 10.dp)
-//            )
-
             Column {
                 Row(
                     modifier = Modifier
@@ -209,9 +201,7 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                             if (currentNoteIndex > 0) currentNoteIndex--
                         },
                         modifier = Modifier.padding(start = 16.dp)
-                    ) {
-
-                    }
+                    ) {}
 
                     Box(
                         modifier = Modifier
@@ -220,34 +210,9 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                     ) {
                         Card(
                             modifier = Modifier
-                                .height(255.dp)
-                                .width(276.dp)
-                                .align(Alignment.Center)
-                                .offset(x = -10.dp)
-                                .graphicsLayer { rotationZ = -10f }
-                                .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
-                            shape = RoundedCornerShape(30.dp),
-                            colors = CardDefaults.cardColors(Color(0xFFBCDDFF))
-                        ) {}
-
-                        Card(
-                            modifier = Modifier
-                                .height(250.dp)
-                                .width(280.dp)
-                                .align(Alignment.Center)
-                                .offset(y = 20.dp, x = 25.dp)
-                                .graphicsLayer { rotationZ = -12f }
-                                .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
-                            shape = RoundedCornerShape(30.dp),
-                            colors = CardDefaults.cardColors(Color(0xFFFFFFD2))
-                        ) {}
-
-                        Card(
-                            modifier = Modifier
                                 .height(260.dp)
                                 .width(290.dp)
                                 .align(Alignment.Center)
-                                .offset(y = -15.dp, x = 10.dp)
                                 .border(4.dp, Color(0xFF020075), RoundedCornerShape(20.dp)),
                             shape = RoundedCornerShape(30.dp),
                             colors = CardDefaults.cardColors(Color(0xFFFFFFFF))
@@ -257,49 +222,12 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                                     .fillMaxSize()
                                     .padding(start = 20.dp, end = 20.dp),
                                 contentAlignment = Alignment.Center
-
                             ) {
                                 Text(
-                                    text = if (!loadingNotas && notas.isNotEmpty()) notas[currentNoteIndex].conteudo else "Carregando...",
+                                    text = if (!loadingNotas && comentarios.isNotEmpty()) comentarios[currentNoteIndex] else "Carregando...",
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2754B2)
-                                )
-                            }
-                        }
-
-                        Image(
-                            painter = painterResource(id = R.drawable.macallmeanotando),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .size(150.dp)
-                                .zIndex(12f)
-                                .offset(y = 20.dp, x = -32.dp)
-                        )
-
-                        Card(
-                            modifier = Modifier
-                                .height(55.dp)
-                                .width(55.dp)
-                                .offset(y = 53.dp, x = 210.dp)
-                                .border(3.dp, Color(0xFF020075), RoundedCornerShape(30.dp)),
-                            shape = RoundedCornerShape(30.dp)
-                        ) {
-                            Box(modifier = Modifier.fillMaxSize()) {
-                                val profilePainter: Painter =
-                                    if (!loadingNotas && notas.isNotEmpty() && !notas[currentNoteIndex].usuario?.foto.isNullOrEmpty()) {
-                                        rememberAsyncImagePainter(model = notas[currentNoteIndex].usuario?.foto)
-                                    } else {
-                                        painterResource(id = R.drawable.perfilcomum)
-                                    }
-
-                                Image(
-                                    painter = profilePainter,
-                                    contentDescription = "",
-                                    contentScale = ContentScale.Crop,
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .clip(RoundedCornerShape(30.dp))
                                 )
                             }
                         }
@@ -307,15 +235,12 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
 
                     IconButton(
                         onClick = {
-                            if (currentNoteIndex < notas.size - 1) currentNoteIndex++
+                            if (currentNoteIndex < comentarios.size - 1) currentNoteIndex++
                         }
-                    ) {
-
-                    }
+                    ) {}
                 }
 
-                //COMENTÁRIOS
-
+                // Comentários
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -323,315 +248,35 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                         .height(350.dp),
                     colors = CardDefaults.cardColors(Color(0xFFBDD8FF))
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .width(400.dp)
-                            .height(70.dp)
-                            .padding(top = 10.dp, start = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
-                            .background(Color(0xFFFFFFFF))
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxHeight().fillMaxWidth().padding(start = 10.dp, end = 10.dp),
-                            horizontalArrangement = Arrangement.SpaceAround,
-                            verticalAlignment = Alignment.CenterVertically
-
-                        ) {
-
-                            Card(
-                                modifier = Modifier
-                                    .height(40.dp)
-                                    .width(40.dp)
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
-                                    .background(Color(0xFFFFFFFF)),
-                            ) {
-                            }
-
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            BasicTextField(
-                                value = conteudo,
-                                onValueChange = { novoValor ->
-                                    conteudo = novoValor
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth(0.8f)
-                                    .background(Color.Transparent),
-                                decorationBox = { innerTextField ->
-                                    Box(
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        if (conteudo.isEmpty()) {
-                                            Text(
-                                                "Digite seu comentário",
-                                                color = Color.Gray,
-                                                modifier = Modifier
-                                                    .align(Alignment.CenterStart)
-                                            )
-                                        }
-                                        innerTextField()
-                                    }
-                                }
-                            )
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Image(
-                                painter = painterResource(id = R.drawable.send),
-                                contentDescription = "Enviar",
-                                modifier = Modifier.size(24.dp)
-                            )
-                        }
-
-                    }
-
-
-                    Box(
-                        modifier = Modifier
-                            .width(400.dp)
-                            .height(110.dp)
-                            .padding(top = 10.dp, start = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
-                            .background(Color(0xFFFFFFFF))
-                    ) {
-                        Row(
+                    comentarios.forEach { comentario ->
+                        Box(
                             modifier = Modifier
-                                .fillMaxHeight()
                                 .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
+                                .padding(10.dp)
+                                .clip(RoundedCornerShape(10.dp))
+                                .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
+                                .background(Color(0xFFFFFFFF))
                         ) {
-                            // Card
-                            Card(
+                            Row(
                                 modifier = Modifier
-                                    .height(40.dp)
-                                    .width(40.dp)
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
-                                    .background(Color(0xFFFFFFFF)),
+                                    .fillMaxHeight()
+                                    .padding(12.dp),
+                                horizontalArrangement = Arrangement.Start,
+                                verticalAlignment = Alignment.CenterVertically
                             ) {
-
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "So my fiancé(F34) and I(m27) have been dating for almost 5 years and have been engaged for about 9 mo",
-                                textAlign = TextAlign.Start,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                lineHeight = 14.sp,
-                                color = Color(0xFF2754B2)
-                            )
-                        }
-
-
-                    }
-                    Box(
-                        modifier = Modifier
-                            .width(400.dp)
-                            .height(110.dp)
-                            .padding(top = 10.dp, start = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
-                            .background(Color(0xFFFFFFFF))
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            // Card
-                            Card(
-                                modifier = Modifier
-                                    .height(40.dp)
-                                    .width(40.dp)
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
-                                    .background(Color(0xFFFFFFFF)),
-                            ) {
-
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "So my fiancé(F34)  about 9 mo",
-                                textAlign = TextAlign.Start,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                lineHeight = 14.sp,
-                                color = Color(0xFF2754B2)
-                            )
-                        }
-
-
-
-                    }
-                    Box(
-                        modifier = Modifier
-                            .width(400.dp)
-                            .height(110.dp)
-                            .padding(top = 10.dp, start = 10.dp)
-                            .clip(RoundedCornerShape(10.dp))
-                            .border(1.5.dp, Color(0xFF213787), RoundedCornerShape(10.dp))
-                            .background(Color(0xFFFFFFFF))
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .fillMaxWidth()
-                                .padding(12.dp),
-                            horizontalArrangement = Arrangement.Start,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-
-                            Card(
-                                modifier = Modifier
-                                    .height(40.dp)
-                                    .width(40.dp)
-                                    .clip(RoundedCornerShape(20.dp))
-                                    .border(2.dp, Color(0Xff234A83), RoundedCornerShape(20.dp))
-                                    .background(Color(0xFFFFFFFF)),
-                            ) {
-
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "So my fiancé(F34)  about 9 mo",
-                                textAlign = TextAlign.Start,
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold,
-                                lineHeight = 14.sp,
-                                color = Color(0xFF2754B2)
-                            )
-                        }
-
-
-
-                    }
-                }
-
-
-
-
-
-            }
-
-            }
-
-                Box(
-                    modifier = Modifier
-                        .height(70.dp)
-                        .fillMaxWidth()
-                        .background(
-                            Brush.horizontalGradient(
-                                colors = listOf(
-                                    Color(0xFF213787),
-                                    Color(0xFF245FB0),
-                                    Color(0xFF6E96E8)
+                                Text(
+                                    text = comentario,
+                                    textAlign = TextAlign.Start,
+                                    fontSize = 14.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    lineHeight = 14.sp,
+                                    color = Color(0xFF2754B2)
                                 )
-                            ),
-                        )
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Button(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.calendarioicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
-
-                        }
-                        Button(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.chaticon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
-
-                        }
-                        Button(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.diarioicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
-
-                        }
-                        Button(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.autoajuda),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
-
-                        }
-                        Button(
-                            onClick = {
-
-                            },
-                            modifier = Modifier
-                                .size(72.dp)
-                                .background(Color.Transparent),
-                            colors = ButtonDefaults.buttonColors(Color.Transparent)
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.doacaoicon),
-                                contentDescription = "",
-                                modifier = Modifier.size(60.dp)
-                            )
-
+                            }
                         }
                     }
                 }
             }
-
         }
-
+    }
+}
