@@ -3,16 +3,26 @@ package br.senai.sp.jandira.callme.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -25,6 +35,9 @@ import br.senai.sp.jandira.callme.R
 
 @Composable
 fun telaChatConversa(controleNavegacao: NavHostController) {
+
+    var conteudo by remember { mutableStateOf("") }
+
     Column(
         verticalArrangement = Arrangement.Top,
         modifier = Modifier
@@ -174,7 +187,7 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
             Column (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(700.dp)
+                    .height(600.dp)
                     .padding(10.dp)
             ){
                 Box(
@@ -354,6 +367,68 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
 
 
             }
+            //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAA
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp)
+                    .background(Color(0xFF2754B2), RoundedCornerShape(30.dp))
+                    .shadow(4.dp, RoundedCornerShape(30.dp))
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                    ,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    BasicTextField(
+                        value = conteudo,
+                        onValueChange = { novoValor ->
+                            conteudo = novoValor
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(0.85f)
+                            .height(50.dp)
+                            .background(Color.Transparent)
+                            .padding(end = 16.dp),
+                        decorationBox = { innerTextField ->
+                            Box(
+                                modifier = Modifier.fillMaxSize()
+                            ) {
+                                if (conteudo.isEmpty()) {
+                                    Text(
+                                        text = "O que está acontecendo?",
+                                        color = Color(0xFF97B3DF),
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterStart)
+                                            .padding(start = 16.dp)
+                                    )
+                                }
+                                innerTextField()
+                            }
+                        }
+                    )
+
+
+                    Image(
+                        painter = painterResource(id = R.drawable.enviarmensagem),
+                        contentDescription = "Enviar mensagem",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .clickable {
+
+                                println("Mensagem enviada: $conteudo")
+                                conteudo = ""
+                            }
+                    )
+                }
+            }
+
+        }
 
 
 
@@ -460,4 +535,4 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
             }
         }
     }
-}
+
