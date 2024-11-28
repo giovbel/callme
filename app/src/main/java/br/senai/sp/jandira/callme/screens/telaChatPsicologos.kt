@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.callme.screens
 
+import android.graphics.drawable.Icon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -26,6 +27,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -46,6 +48,9 @@ import br.senai.sp.jandira.callme.R
 
 @Composable
 fun telaChatPsicologo(controleNavegacao: NavHostController) {
+
+    val rating = 5
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -181,8 +186,51 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                             text = "Atendimento em casos de crise",
                             fontSize = 15.sp,
                             color = Color(0xFF093C7D),
-                            fontWeight = FontWeight.Bold
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(start = 12.dp, top =(6.dp))
                         )
+
+                        HorizontalDivider(color = Color(0xFF3758C3), thickness = 2.dp)
+
+                        Row {
+                            Card (
+                                modifier = Modifier.height(62.dp).width(62.dp)
+                                    .border(2.dp, color = Color(0xFF0B2874), RoundedCornerShape(100.dp)),
+
+                                shape = RoundedCornerShape(100.dp),
+                            ){}
+                            Text(
+                                text = "Marta Luana Martins",
+                                fontSize = 16.sp,
+                                color = Color(0xFF2754B2),
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(start = 12.dp, top =(6.dp))
+                            )
+
+                            Row(modifier = Modifier.padding(8.dp)) {
+                                // Exibe as 5 estrelas
+//                                for (i in 1..5) {
+//                                    if (i <= rating) {
+//                                        // Estrela preenchida
+//                                        Icon(
+//                                            imageVector = androidx.compose.material3.icons.filled.Star,
+//                                            contentDescription = "Estrela Preenchida",
+//                                            tint = Color.Yellow,
+//                                            modifier = Modifier.padding(end = 4.dp)
+//                                        )
+//                                    } else {
+//                                        // Estrela não preenchida
+//                                        Icon(
+//                                            imageVector = androidx.compose.material3.icons.filled.StarBorder,
+//                                            contentDescription = "Estrela Vazia",
+//                                            tint = Color.Yellow,
+//                                            modifier = Modifier.padding(end = 4.dp)
+//                                        )
+//                                    }
+//
+//
+//                        }
+
                     }
 
                 }
@@ -239,7 +287,7 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                 }
                 Button(
                     onClick = {
-                    controleNavegacao.navigate("telaNotas")
+
                     },
                     modifier = Modifier
                         .size(72.dp)
