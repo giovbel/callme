@@ -119,12 +119,13 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
             colors = CardDefaults.cardColors(containerColor = Color.Transparent)
         ) {
 
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(75.dp),
-                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween
-            ){
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Button(
                     onClick = {
 
@@ -168,10 +169,10 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
             }
             HorizontalDivider(color = Color(0xFF3758C3), thickness = 2.dp)
 
-            Column (
+            Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
-            ){
+            ) {
                 Card(
                     modifier = Modifier
                         .height(200.dp)
@@ -180,176 +181,218 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                         .border(2.dp, color = Color(0xFF2961D5), RoundedCornerShape(10.dp)),
                     shape = RoundedCornerShape(10.dp),
                     colors = CardDefaults.cardColors(Color.Transparent)
-                ){
+                ) {
                     Column {
                         Text(
                             text = "Atendimento em casos de crise",
                             fontSize = 15.sp,
                             color = Color(0xFF093C7D),
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(start = 12.dp, top =(6.dp))
+                            modifier = Modifier.padding(start = 12.dp, top = (6.dp))
                         )
 
                         HorizontalDivider(color = Color(0xFF3758C3), thickness = 2.dp)
 
-                        Row {
+                            Row (
+                                modifier = Modifier.padding(start = 10.dp, top = 10.dp)
+                            ){
+                                Card(
+                                    modifier = Modifier
+                                        .height(62.dp)
+                                        .width(62.dp)
+                                        .border(
+                                            2.dp,
+                                            color = Color(0xFF0B2874),
+                                            RoundedCornerShape(100.dp)
+                                        ),
+
+                                    shape = RoundedCornerShape(100.dp),
+                                ) {}
+                                Column (){
+                                    Text(
+                                        text = "Marta Luana Martins",
+                                        fontSize = 16.sp,
+                                        color = Color(0xFF2754B2),
+                                        fontWeight = FontWeight.Bold,
+                                        modifier = Modifier.padding(start = 12.dp, top = (6.dp))
+                                    )
+
+                                    Row(modifier = Modifier.padding(start = 8.dp)) {
+                                        for (i in 1..5) {
+                                            if (i <= rating) {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.estrelas),
+                                                    contentDescription = "",
+                                                    modifier = Modifier
+                                                        .height(20.dp)
+                                                        .width(20.dp)
+                                                )
+                                            } else {
+                                                Image(
+                                                    painter = painterResource(id = R.drawable.estrelasvazias),
+                                                    contentDescription = "",
+                                                    modifier = Modifier
+                                                        .height(60.dp)
+                                                        .width(60.dp)
+                                                )
+                                            }
+
+                                        }
+                                    }
+                                }
+
+
+
+
+                            }
+
+                        Row (
+                            modifier = Modifier
+                        ){
                             Card (
-                                modifier = Modifier.height(62.dp).width(62.dp)
-                                    .border(2.dp, color = Color(0xFF0B2874), RoundedCornerShape(100.dp)),
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(270.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF2961D5))
+                            ){
 
-                                shape = RoundedCornerShape(100.dp),
-                            ){}
-                            Text(
-                                text = "Marta Luana Martins",
-                                fontSize = 16.sp,
-                                color = Color(0xFF2754B2),
-                                fontWeight = FontWeight.Bold,
-                                modifier = Modifier.padding(start = 12.dp, top =(6.dp))
-                            )
+                            }
 
-                            Row(modifier = Modifier.padding(8.dp)) {
-                                // Exibe as 5 estrelas
-//                                for (i in 1..5) {
-//                                    if (i <= rating) {
-//                                        // Estrela preenchida
-//                                        Icon(
-//                                            imageVector = androidx.compose.material3.icons.filled.Star,
-//                                            contentDescription = "Estrela Preenchida",
-//                                            tint = Color.Yellow,
-//                                            modifier = Modifier.padding(end = 4.dp)
-//                                        )
-//                                    } else {
-//                                        // Estrela não preenchida
-//                                        Icon(
-//                                            imageVector = androidx.compose.material3.icons.filled.StarBorder,
-//                                            contentDescription = "Estrela Vazia",
-//                                            tint = Color.Yellow,
-//                                            modifier = Modifier.padding(end = 4.dp)
-//                                        )
-//                                    }
-//
-//
-//                        }
+
+                            Card (
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(50.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF2961D5))
+                            ){
+
+                            }
+                        }
+
+
+
+
 
                     }
-
                 }
 
 
-                Card(
-                    modifier = Modifier
-                        .height(200.dp)
-                        .width(350.dp)
-                        .padding(top = 20.dp)
-                        .border(2.dp, color = Color(0xFF2961D5), RoundedCornerShape(10.dp)),
-                    shape = RoundedCornerShape(10.dp),
-                    colors = CardDefaults.cardColors(Color.Transparent)
-                ){
+                    Card(
+                        modifier = Modifier
+                            .height(200.dp)
+                            .width(350.dp)
+                            .padding(top = 20.dp)
+                            .border(2.dp, color = Color(0xFF2961D5), RoundedCornerShape(10.dp)),
+                        shape = RoundedCornerShape(10.dp),
+                        colors = CardDefaults.cardColors(Color.Transparent)
+                    ) {
 
+                    }
                 }
+
             }
 
-        }
-        Box(
-            modifier = Modifier
-                .height(70.dp)
-                .fillMaxWidth()
-                .background(
-                    Brush.horizontalGradient(
-                        colors = listOf(
-                            Color(0xFF213787),
-                            Color(0xFF245FB0),
-                            Color(0xFF6E96E8)
-                        )
-                    ),
-                )
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+            Box(
+                modifier = Modifier
+                    .height(70.dp)
+                    .fillMaxWidth()
+                    .background(
+                        Brush.horizontalGradient(
+                            colors = listOf(
+                                Color(0xFF213787),
+                                Color(0xFF245FB0),
+                                Color(0xFF6E96E8)
+                            )
+                        ),
+                    )
             ) {
-                Button(
-                    onClick = {
-
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.calendarioicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    Button(
+                        onClick = {
 
-                }
-                Button(
-                    onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.calendarioicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.chaticon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    }
+                    Button(
+                        onClick = {
 
-                }
-                Button(
-                    onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.chaticon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.diarioicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    }
+                    Button(
+                        onClick = {
 
-                }
-                Button(
-                    onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.diarioicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.autoajuda),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    }
+                    Button(
+                        onClick = {
 
-                }
-                Button(
-                    onClick = {
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.autoajuda),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
 
-                    },
-                    modifier = Modifier
-                        .size(72.dp)
-                        .background(Color.Transparent),
-                    colors = ButtonDefaults.buttonColors(Color.Transparent)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.doacaoicon),
-                        contentDescription = "",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    }
+                    Button(
+                        onClick = {
 
+                        },
+                        modifier = Modifier
+                            .size(72.dp)
+                            .background(Color.Transparent),
+                        colors = ButtonDefaults.buttonColors(Color.Transparent)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.doacaoicon),
+                            contentDescription = "",
+                            modifier = Modifier.size(60.dp)
+                        )
+                    }
                 }
             }
         }
-    }
-}
+        }
+
+

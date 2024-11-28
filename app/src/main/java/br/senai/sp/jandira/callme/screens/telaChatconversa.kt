@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -190,61 +191,53 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                     .height(600.dp)
                     .padding(10.dp)
             ){
-                Box(
+
+
+                Card(
+
                     modifier = Modifier
-                        .height(55.dp)
-                        .width(230.dp)
+                        .widthIn(max= 300.dp)
                         .align(Alignment.End)
                         .shadow(8.dp, shape = RoundedCornerShape(30.dp))
                         .border(2.dp, Color(0xFF4A6B9B), RoundedCornerShape(30.dp)),
+                    colors = CardDefaults.cardColors(Color(0xFF85A3DC)),
                 ) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(Color(0xFF85A3DC)),
-                    ) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                    Row (
+                        modifier = Modifier.padding(start = 10.dp, top = 5.dp, bottom = 10.dp, end = 20.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Card(
+                            modifier = Modifier
+                                .size(40.dp),
+                            shape = RoundedCornerShape(100.dp),
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .size(40.dp),
-                                shape = RoundedCornerShape(100.dp),
-                            ) {
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "A vida é muito triste",
-                                fontSize = 14.sp,
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold
-                            )
                         }
+
+                        Spacer(modifier = Modifier.width(8.dp))
+
+                        Text(
+                            text = "A vida é muito triste",
+                            fontSize = 14.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
                     }
 
                 }
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(10.dp))
 
-                Box(
-                    modifier = Modifier
-                        .height(55.dp)
-                        .width(120.dp)
-                        .shadow(8.dp, shape = RoundedCornerShape(30.dp))
-                        .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(30.dp))
-                ) {
+
+
                     Card(
                         modifier = Modifier
-                            .fillMaxSize(),
-                        shape = RoundedCornerShape(10.dp),
+                            .widthIn(max= 300.dp)
+                            .shadow(8.dp, shape = RoundedCornerShape(30.dp))
+                            .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(30.dp)),
                         colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
                     ) {
                         Row (
-                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
+                            modifier = Modifier.padding(start = 10.dp, top = 5.dp, bottom = 10.dp, end = 20.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ){
                             Card(
@@ -257,7 +250,7 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                             Spacer(modifier = Modifier.width(8.dp))
 
                             Text(
-                                text = "Oii",
+                                text = "ata",
                                 fontSize = 14.sp,
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold
@@ -265,49 +258,6 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                         }
 
                     }
-
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Box(
-                    modifier = Modifier
-                        .height(55.dp)
-                        .width(120.dp)
-                        .shadow(8.dp, shape = RoundedCornerShape(30.dp))
-                        .border(2.dp, Color(0xFF0044AA), RoundedCornerShape(30.dp))
-                ) {
-
-                    Card(
-                        modifier = Modifier
-                            .fillMaxSize(),
-                        shape = RoundedCornerShape(10.dp),
-                        colors = CardDefaults.cardColors(Color(0xFF4A7DCD))
-                    ) {
-                        Row (
-                            modifier = Modifier.fillMaxWidth().padding(start = 10.dp, top = 5.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ){
-                            Card(
-                                modifier = Modifier
-                                    .size(40.dp),
-                                shape = RoundedCornerShape(100.dp),
-                            ) {
-                            }
-
-                            Spacer(modifier = Modifier.width(8.dp))
-
-                            Text(
-                                text = "Oii",
-                                fontSize = 14.sp,
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold
-                            )
-                        }
-
-                    }
-
-                }
 
 
 
@@ -317,62 +267,76 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
 
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp)
-                    .background(Color(0xFF2754B2), RoundedCornerShape(30.dp))
-                    .shadow(4.dp, RoundedCornerShape(30.dp))
+                    .fillMaxSize()
+                    .windowInsetsPadding(WindowInsets.ime)
             ) {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp)
-                    ,
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .padding(12.dp)
+                        .align(Alignment.BottomCenter)
+                        .background(Color(0xFF2754B2), RoundedCornerShape(30.dp))
+                        .shadow(4.dp, RoundedCornerShape(30.dp))
                 ) {
-                    BasicTextField(
-                        value = conteudo,
-                        onValueChange = { novoValor ->
-                            conteudo = novoValor
-                        },
+                    Row(
                         modifier = Modifier
-                            .fillMaxWidth(0.85f)
-                            .height(50.dp)
-                            .background(Color.Transparent)
-                            .padding(end = 16.dp),
-                        decorationBox = { innerTextField ->
-                            Box(
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                if (conteudo.isEmpty()) {
-                                    Text(
-                                        text = "O que está acontecendo?",
-                                        color = Color(0xFF97B3DF),
-                                        fontWeight = FontWeight.Bold,
-                                        modifier = Modifier
-                                            .align(Alignment.CenterStart)
-                                            .padding(start = 16.dp)
-                                    )
+                            .fillMaxWidth()
+                            .padding(start = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        BasicTextField(
+                            value = conteudo,
+                            onValueChange = { novoValor ->
+                                conteudo = novoValor
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(50.dp)
+                                .background(Color.Transparent)
+                                .padding(horizontal = 6.dp),
+                            textStyle = TextStyle(
+                                color = Color(0xFF97B3DF),
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            decorationBox = { innerTextField ->
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(start = 4.dp),
+                                    contentAlignment = Alignment.CenterStart
+                                ) {
+                                    if (conteudo.isEmpty()) {
+                                        Text(
+                                            text = "O que está acontecendo?",
+                                            color = Color(0xFF97B3DF),
+                                            fontWeight = FontWeight.Bold,
+                                            modifier = Modifier
+                                                .align(Alignment.CenterStart)
+                                                .padding(start = 1.dp)
+                                        )
+                                    }
+                                    innerTextField()
                                 }
-                                innerTextField()
                             }
-                        }
-                    )
+                        )
 
-
-                    Image(
-                        painter = painterResource(id = R.drawable.enviarmensagem),
-                        contentDescription = "Enviar mensagem",
-                        modifier = Modifier
-                            .size(24.dp)
-                            .clickable {
-
-                                println("Mensagem enviada: $conteudo")
-                                conteudo = ""
-                            }
-                    )
+                        Image(
+                            painter = painterResource(id = R.drawable.enviarmensagem),
+                            contentDescription = "Enviar mensagem",
+                            modifier = Modifier
+                                .size(40.dp)
+                                .padding(8.dp)
+                                .clickable {
+                                    println("Mensagem enviada: $conteudo")
+                                    conteudo = ""
+                                }
+                        )
+                    }
                 }
             }
+
 
         }
 
