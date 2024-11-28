@@ -239,7 +239,7 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                 }
                 Button(
                     onClick = {
-
+                    controleNavegacao.navigate("telaNotas")
                     },
                     modifier = Modifier
                         .size(72.dp)

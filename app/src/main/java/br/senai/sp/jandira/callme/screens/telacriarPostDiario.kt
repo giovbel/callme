@@ -52,13 +52,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
+import br.senai.sp.jandira.callme.model.Diario
+import br.senai.sp.jandira.callme.model.diarioResponse
+import br.senai.sp.jandira.callme.service.RetrofitFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 
 @Composable
-fun telaCriarPostDiario(controleNavegacao: NavHostController) {
+fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
 
     var conteudo by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("Título") }
@@ -323,7 +329,24 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController) {
                                         .height(60.dp)
                                         .fillMaxWidth()
                                         .align(Alignment.CenterHorizontally)
-                                        .padding(start = 12.dp, end = 12.dp, bottom = 10.dp),
+                                        .padding(start = 12.dp, end = 12.dp, bottom = 10.dp).clickable { selectedImage?.let { Diario(titulo = title, conteudo = conteudo, dataPublicacao = currentDate, classificacao = it.toInt(), idUsuario =
+                                        id.toInt())}
+                                            ?.let { RetrofitFactory.getDiarioService().addDiario(diario = it).enqueue(object : Callback<diarioResponse>{
+                                                override fun onResponse(
+                                                    p0: Call<diarioResponse>,
+                                                    p1: Response<diarioResponse>
+                                                ) {
+                                                    controleNavegacao.navigate("telaDiario")
+
+                                                }
+
+                                                override fun onFailure(
+                                                    p0: Call<diarioResponse>,
+                                                    p1: Throwable
+                                                ) {
+
+                                                }
+                                            }) } },
                                     colors = CardDefaults.cardColors(Color(0xFF1F55C6)),
                                     shape = RoundedCornerShape(6.dp),
                                 ){

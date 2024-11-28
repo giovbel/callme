@@ -1,6 +1,7 @@
 package br.senai.sp.jandira.telacriarnota
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -95,7 +96,10 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
             override fun onResponse(call: Call<NotasResponse>, response: Response<NotasResponse>) {
                 if (response.isSuccessful) {
                     notas = response.body()?.dados?.take(10) ?: emptyList()
-                    comentarios = notas.flatMap { it.comentarios ?: listOf("Sem comentários") }
+                    Log.i("FATAL",notas.toString())
+                    comentarios = notas.flatMap { postagem ->
+                        postagem.respostas?.map { resposta -> resposta.conteudo } ?: listOf("Sem comentários")
+                    }
                     loadingNotas = false
                 } else {
                     Toast.makeText(
@@ -224,7 +228,7 @@ fun telaComentariosLeitor(controleNavegacao: NavHostController) {
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    text = if (!loadingNotas && comentarios.isNotEmpty()) comentarios[currentNoteIndex] else "Carregando...",
+                                    text = notas[0].conteudo,
                                     textAlign = TextAlign.Center,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF2754B2)

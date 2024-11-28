@@ -232,7 +232,7 @@ private fun cadastrarUsuario(cadastroCliente: Cliente, controleNavegacao: NavHos
         override fun onResponse(call: Call<ClienteResponse>, response: Response<ClienteResponse>) {
             if (response.isSuccessful) {
                 Log.d("Cadastro", "Cadastro realizado com sucesso!")
-                controleNavegacao.navigate("landingPageChat")
+                controleNavegacao.navigate("telaLogin")
             } else {
                 Log.e("Cadastro", "Falha ao cadastrar: ${response.errorBody()?.string()}")
             }

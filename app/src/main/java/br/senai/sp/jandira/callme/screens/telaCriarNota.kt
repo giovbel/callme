@@ -46,7 +46,7 @@ import retrofit2.Response
 fun telaCriarNota(controleNavegacao: NavHostController) {
     var nota by remember { mutableStateOf(TextFieldValue("")) }
     val context = LocalContext.current
-    val notaService =RetrofitFactory.getNotasService()
+    val notaService = RetrofitFactory.getNotasService()
 
     Column(
         modifier = Modifier
@@ -219,31 +219,57 @@ fun telaCriarNota(controleNavegacao: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceAround,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                   
+
 
                     Button(
                         colors = ButtonDefaults.buttonColors(Color(0xFF213787)),
                         onClick = {
                             if (nota.text.isNotEmpty()) {
-                                val novaNota = Postagem(conteudo = nota.text, idUsuario = 2) // Ajuste o ID conforme necessário
-                                notaService.adicionarNota(novaNota).enqueue(object : Callback<NotaResponse> {
-                                    override fun onResponse(call: Call<NotaResponse>, response: Response<NotaResponse>) {
-                                        Log.i("calma",response.toString())
-                                        if (response.isSuccessful) {
-                                            Toast.makeText(context, "Nota adicionada com sucesso!", Toast.LENGTH_SHORT).show()
-                                            controleNavegacao.navigate("telaNotas")
-                                        } else {
-                                            Toast.makeText(context, "Erro ao adicionar nota.", Toast.LENGTH_SHORT).show()
+                                val novaNota = Postagem(
+                                    conteudo = nota.text,
+                                    idUsuario = 2
+                                ) // Ajuste o ID conforme necessário
+                                notaService.adicionarNota(novaNota)
+                                    .enqueue(object : Callback<NotaResponse> {
+                                        override fun onResponse(
+                                            call: Call<NotaResponse>,
+                                            response: Response<NotaResponse>
+                                        ) {
+                                            Log.i("calma", response.toString())
+                                            if (response.isSuccessful) {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Nota adicionada com sucesso!",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                controleNavegacao.navigate("telaNotas")
+                                            } else {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Erro ao adicionar nota.",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                            }
                                         }
-                                    }
 
-                                    override fun onFailure(call: Call<NotaResponse>, t: Throwable) {
-                                        Log.i("Calma", t.message.toString())
-                                        Toast.makeText(context, "Falha na comunicação com o servidor.", Toast.LENGTH_SHORT).show()
-                                    }
-                                })
+                                        override fun onFailure(
+                                            call: Call<NotaResponse>,
+                                            t: Throwable
+                                        ) {
+                                            Log.i("Calma", t.message.toString())
+                                            Toast.makeText(
+                                                context,
+                                                "Falha na comunicação com o servidor.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    })
                             } else {
-                                Toast.makeText(context, "A nota não pode estar vazia.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    context,
+                                    "A nota não pode estar vazia.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         },
                         modifier = Modifier
@@ -267,6 +293,93 @@ fun telaCriarNota(controleNavegacao: NavHostController) {
                         )
                     }
                 }
+            }
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Button(
+                onClick = {
+
+                },
+                modifier = Modifier
+                    .size(72.dp)
+                    .background(Color.Transparent),
+                colors = ButtonDefaults.buttonColors(Color.Transparent)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.calendarioicon),
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+
+            }
+            Button(
+                onClick = {
+                    controleNavegacao.navigate("landingPageChat")
+                },
+                modifier = Modifier
+                    .size(72.dp)
+                    .background(Color.Transparent),
+                colors = ButtonDefaults.buttonColors(Color.Transparent)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.chaticon),
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+
+            }
+            Button(
+                onClick = {
+                    controleNavegacao.navigate("telaDiario")
+                },
+                modifier = Modifier
+                    .size(72.dp)
+                    .background(Color.Transparent),
+                colors = ButtonDefaults.buttonColors(Color.Transparent)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.diarioicon),
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+
+            }
+            Button(
+                onClick = {
+                    controleNavegacao.navigate("telaAutoajuda")
+                },
+                modifier = Modifier
+                    .size(72.dp)
+                    .background(Color.Transparent),
+                colors = ButtonDefaults.buttonColors(Color.Transparent)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.autoajuda),
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+
+            }
+            Button(
+                onClick = {
+                    controleNavegacao.navigate("telaAutoajuda")
+                },
+                modifier = Modifier
+                    .size(72.dp)
+                    .background(Color.Transparent),
+                colors = ButtonDefaults.buttonColors(Color.Transparent)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.doacaoicon),
+                    contentDescription = "",
+                    modifier = Modifier.size(60.dp)
+                )
+
             }
         }
     }

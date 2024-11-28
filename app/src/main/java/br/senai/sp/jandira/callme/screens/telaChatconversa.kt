@@ -113,7 +113,7 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                     }
                     Column {
                         Text(
-                            text = "Giovanna Belo",
+                            text = "Clarice Rodrigues",
                             fontSize = 20.sp,
                             color = Color(0xFF2754B2),
                             fontWeight = FontWeight.Bold

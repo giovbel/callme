@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.callme.service
 
+import br.senai.sp.jandira.callme.model.Diario
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,5 +23,8 @@ object RetrofitFactory {
 
     fun getComentarioService(): ComentarioService {
         return retrofit.create(ComentarioService::class.java)
+    }
+    fun getDiarioService(): DiarioService {
+        return retrofit.create(DiarioService::class.java)
     }
 }

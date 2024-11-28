@@ -19,6 +19,7 @@ import br.senai.sp.jandira.callme.screens.redefinirSenhaCodigo
 import br.senai.sp.jandira.callme.screens.redefinirsenha
 import br.senai.sp.jandira.callme.screens.telaAutojuda
 import br.senai.sp.jandira.callme.screens.telaCadastro
+import br.senai.sp.jandira.callme.screens.telaCardAutoAjuda
 import br.senai.sp.jandira.callme.screens.telaChatConversa
 import br.senai.sp.jandira.callme.screens.telaChatList
 import br.senai.sp.jandira.callme.screens.telaChatPsicologo
@@ -47,7 +48,7 @@ class MainActivity : ComponentActivity() {
                     val controleNavegacao = rememberNavController()
                     NavHost(
                         navController = controleNavegacao,
-                        startDestination = "telaComentariosLeitor"
+                        startDestination = "telaLogin"
                     ){
                         composable(route = "landingpage") { landingPage(controleNavegacao)}
                         composable(route = "telaLogin") { telaLogin(controleNavegacao) }
@@ -59,7 +60,10 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaNotas") { telaNotas(controleNavegacao) }
                         composable(route = "telaDiario") { telaDiario(controleNavegacao) }
                         composable(route = "telaCategoria") { telaCategoria(controleNavegacao) }
-                        composable(route = "telaCriarPostDiario") { telaCriarPostDiario(controleNavegacao) }
+                        composable(route = "telaCriarPostDiario") {
+                                backStackEntry ->
+                            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull() ?: 0
+                            telaCriarPostDiario(controleNavegacao, id.toString()) }
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
                         composable(route = "telaCriarNota") { telaCriarNota(controleNavegacao) }
                         composable(route = "telaEscolherAvatar") { telaEscolherAvatar(controleNavegacao) }
@@ -67,6 +71,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaPerfil") { telaPerfil(controleNavegacao) }
                         composable(route = "telaChatPsicologo") { telaChatPsicologo(controleNavegacao) }
                         composable(route = "telaAutoajuda") { telaAutojuda(controleNavegacao) }
+                        composable(route = "telaCardAutoAjuda") { telaCardAutoAjuda(controleNavegacao) }
                         composable(route = "telaChatConversa") {telaChatConversa(controleNavegacao)}
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }

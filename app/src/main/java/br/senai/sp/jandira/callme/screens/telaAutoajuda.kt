@@ -1,8 +1,10 @@
 package br.senai.sp.jandira.callme.screens
 
+import android.service.autofill.OnClickAction
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +23,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -36,6 +39,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -170,6 +174,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                         .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                     colors = CardDefaults.cardColors(Color(0xFFF2F5F8)),
                 ){
+
                     Card (
                         modifier = Modifier
                             .height(80.dp)
@@ -177,7 +182,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                             .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                     ){
-                        
+                        Image(painter = painterResource(id = R.drawable.ansiedade), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight().clickable { controleNavegacao.navigate("telaCardAutoAjuda")}, contentScale = ContentScale.Crop)
                     }
                     Column (
 
@@ -199,12 +204,12 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                     .height(25.dp)
                                     .width(25.dp)
                                     .clip(RoundedCornerShape(100.dp))
-                            ){
+                            ){ Image(painter = painterResource(id = R.drawable.profissadepressao), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
 
                             }
                             Spacer(modifier = Modifier.width(6.dp))
 
-                            Text(text = "Murilo Carolino", fontSize = 11.sp)
+                            Text(text = "Jose Da Silva", fontSize = 11.sp)
                         }
 
                     }
@@ -228,7 +233,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                             .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                     ){
-
+                        Image(painter = painterResource(id = R.drawable.depressao), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                     }
                     Column (
                         modifier = Modifier.padding(start = 10.dp, top = 5.dp)
@@ -248,11 +253,11 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                     .width(25.dp)
                                     .clip(RoundedCornerShape(100.dp))
                             ){
-
+                                Image(painter = painterResource(id = R.drawable.profissadesolidao), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                             }
                             Spacer(modifier = Modifier.width(6.dp))
 
-                            Text(text = "Murilo Carolino", fontSize = 11.sp)
+                            Text(text = "Fernando Ferdinando", fontSize = 11.sp)
                         }
 
                     }
@@ -277,7 +282,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                         .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                     colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                 ){
-
+                    Image(painter = painterResource(id = R.drawable.anorexia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                 }
                 Column (
                     modifier = Modifier.padding(start = 10.dp, top = 5.dp)
@@ -297,11 +302,11 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                 .width(25.dp)
                                 .clip(RoundedCornerShape(100.dp))
                         ){
-
+                            Image(painter = painterResource(id = R.drawable.profissaanorexia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                         }
                         Spacer(modifier = Modifier.width(6.dp))
 
-                        Text(text = "Murilo Carolino", fontSize = 11.sp)
+                        Text(text = "Clarice Rodrigues", fontSize = 11.sp)
                     }
 
                 }
@@ -323,7 +328,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                             .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                     ){
-
+                        Image(painter = painterResource(id = R.drawable.homofobia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                     }
                     Column (
                         modifier = Modifier.padding(start = 10.dp, top = 5.dp)
@@ -343,11 +348,11 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                     .width(25.dp)
                                     .clip(RoundedCornerShape(100.dp))
                             ){
-
+                                Image(painter = painterResource(id = R.drawable.profissasla), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                             }
                             Spacer(modifier = Modifier.width(6.dp))
 
-                            Text(text = "Murilo Carolino", fontSize = 11.sp)
+                            Text(text = "Cleiton Dos Santos", fontSize = 11.sp)
                         }
 
                     }
@@ -370,7 +375,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                 .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                             colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                         ) {
-
+                            Image(painter = painterResource(id = R.drawable.luto), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                         }
                         Column(
                             modifier = Modifier.padding(start = 10.dp, top = 5.dp)
@@ -379,7 +384,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                 modifier = Modifier.height(50.dp)
                             ) {
                                 Text(
-                                    text = "Quero me assumir.",
+                                    text = "Como lidar com o luto?",
                                     color = Color(0xFF2754B2),
                                     fontWeight = FontWeight.Bold
                                 )
@@ -394,11 +399,11 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                                         .width(25.dp)
                                         .clip(RoundedCornerShape(100.dp))
                                 ) {
-
+                                    Image(painter = painterResource(id = R.drawable.profissahomofobia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                                 }
                                 Spacer(modifier = Modifier.width(6.dp))
 
-                                Text(text = "Murilo Carolino", fontSize = 11.sp)
+                                Text(text = "Vitoria Silva", fontSize = 11.sp)
                             }
 
                         }

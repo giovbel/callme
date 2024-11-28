@@ -32,7 +32,7 @@ fun landingPageChat(controleNavegacao: NavHostController) {
     ) {
         Box(
             modifier = Modifier
-              //  .clickable { controleNavegacao.navigate("telaNotas") }
+                .clickable { controleNavegacao.navigate("telaChatList") }
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(

@@ -380,7 +380,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
                         }
                         Button(
                             onClick = {
-
+                              controleNavegacao.navigate("telaAutoajuda")
                             },
                             modifier = Modifier
                                 .size(72.dp)
@@ -395,8 +395,7 @@ fun telaNotas(controleNavegacao: NavHostController) {
 
                         }
                         Button(
-                            onClick = {
-
+                            onClick = { controleNavegacao.navigate("telaAutoajuda")
                             },
                             modifier = Modifier
                                 .size(72.dp)

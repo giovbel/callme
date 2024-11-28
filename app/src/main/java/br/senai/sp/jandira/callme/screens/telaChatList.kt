@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.callme.screens
+ package br.senai.sp.jandira.callme.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -122,7 +123,7 @@ fun telaChatList(controleNavegacao: NavHostController) {
                         modifier = Modifier.size(70.dp)
                     )
                     Button(
-                        onClick = { /* ação ao clicar em Psicólogos */ },
+                        onClick = {controleNavegacao.navigate("telaChatPsicologo")},
                         modifier = Modifier.background(Color.Transparent),
                         colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
@@ -144,21 +145,27 @@ fun telaChatList(controleNavegacao: NavHostController) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Card(
+                        onClick = {controleNavegacao.navigate("telaChatConversa")},
                         modifier = Modifier
                             .height(80.dp)
                             .width(80.dp)
                             .border(width = 2.dp, color = Color(0xFF3758C3), shape = CircleShape),
                         shape = CircleShape
-                    ) {}
+                    ) {
+                        Image(painter = painterResource(id = R.drawable.profissaanorexia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
+                    }
                     Column(
                         modifier = Modifier.padding(start = 8.dp)
                     ) {
+
                         Text(
-                            text = "Luana Santos",
+
+                            text = "Clarice Rodrigues",
                             color = Color(0xFF215CB9),
                             fontWeight = FontWeight.Bold
                         )
-                        Text(text = "oi")
+
+                        Text(text = "Obrigado pela ajuda!")
                     }
                 }
 
