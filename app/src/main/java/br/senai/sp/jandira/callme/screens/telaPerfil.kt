@@ -8,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -22,9 +23,11 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.R
 import br.senai.sp.jandira.callme.model.ResultAvatares
 import br.senai.sp.jandira.callme.service.RetrofitFactory
@@ -144,7 +147,7 @@ fun telaPerfil(controleNavegacao: NavHostController) {
             }
         }
 
-        // Título para seleção de avatar
+
         Text(
             text = "Escolha seu avatar",
             modifier = Modifier
@@ -155,7 +158,7 @@ fun telaPerfil(controleNavegacao: NavHostController) {
             fontWeight = FontWeight.Bold
         )
 
-        // Exibição dos avatares (LazyRow)
+
         LazyRow(
             modifier = Modifier
                 .padding(horizontal = 16.dp)
@@ -186,34 +189,242 @@ fun telaPerfil(controleNavegacao: NavHostController) {
         }
 
         ////////////////////////////////////////////////////////////////////////////////////////
-        Card (
-            modifier = Modifier.fillMaxWidth().height(630.dp),
-            colors = CardDefaults.cardColors(Color (0xFFE3EFFF)),
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(630.dp),
+            colors = CardDefaults.cardColors(Color(0xFFE3EFFF)),
             shape = RectangleShape
-        ){
+        ) {
 
 
-            Button(
-                onClick = {  },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF213787))
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                        .height(500.dp)
+                        .border(5.dp, Color(0xFF5A8AD6)),
+                    colors = CardDefaults.cardColors(Color.Transparent)
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.historico),
-                        contentDescription = null,
-                        tint = Color.White,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Ver histórico de notas", color = Color.White)
+
+
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                    ) {
+                        Card (
+
+                            modifier = Modifier
+                                .height(100.dp)
+                                .width(90.dp)
+                                .padding(top = 12.dp)
+                                .border(5.dp, Color(0xFF1F55C6), CircleShape)
+                                .align(Alignment.TopCenter),
+                            shape = CircleShape
+                        ){
+
+                        }
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight(),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Card(
+                                modifier = Modifier
+                                    .width(300.dp)
+                                    .padding(bottom = 12.dp)
+                                    .border(3.dp, Color(0xFF1F55C6), CircleShape)
+                                    .height(50.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF8CBAFF)),
+                                shape = CircleShape
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+
+                                    ) {
+                                    Card(
+                                        modifier = Modifier
+                                            .width(95.dp)
+                                            .fillMaxHeight(),
+                                        colors = CardDefaults.cardColors(Color(0xFF2755B2)),
+                                        shape = RoundedCornerShape(
+                                            topStart = 16.dp,
+                                            bottomStart = 16.dp
+                                        )
+                                    ) {
+                                        Box(
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = "Nome",
+                                                fontSize = 16.sp,
+                                                color = Color.White,
+                                                fontWeight = FontWeight.Medium
+                                            )
+                                        }
+
+                                    }
+                                }
+                            }
+
+
+
+                            Card(
+                                modifier = Modifier
+                                    .width(300.dp)
+                                    .padding(bottom = 12.dp)
+                                    .border(3.dp, Color(0xFF1F55C6), CircleShape)
+                                    .height(50.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF8CBAFF)),
+                                shape = CircleShape
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+
+                                    ) {
+                                    Card(
+                                        modifier = Modifier
+                                            .width(95.dp)
+                                            .fillMaxHeight(),
+                                        colors = CardDefaults.cardColors(Color(0xFF2755B2)),
+                                        shape = RoundedCornerShape(
+                                            topStart = 16.dp,
+                                            bottomStart = 16.dp
+                                        )
+                                    ) {
+                                        Box(
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = "E-mail",
+                                                fontSize = 16.sp,
+                                                color = Color.White,
+                                                fontWeight = FontWeight.Medium
+                                            )
+                                        }
+
+                                    }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier
+                                    .width(300.dp)
+                                    .padding(bottom = 12.dp)
+                                    .border(3.dp, Color(0xFF1F55C6), CircleShape)
+                                    .height(50.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF8CBAFF)),
+                                shape = CircleShape
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+
+                                    ) {
+                                    Card(
+                                        modifier = Modifier
+                                            .width(95.dp)
+                                            .fillMaxHeight(),
+                                        colors = CardDefaults.cardColors(Color(0xFF2755B2)),
+                                        shape = RoundedCornerShape(
+                                            topStart = 16.dp,
+                                            bottomStart = 16.dp
+                                        )
+                                    ) {
+                                        Box(
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = "Senha",
+                                                fontSize = 16.sp,
+                                                color = Color.White,
+                                                fontWeight = FontWeight.Medium
+                                            )
+                                        }
+
+                                    }
+                                }
+                            }
+                            Card(
+                                modifier = Modifier
+                                    .width(300.dp)
+                                    .border(3.dp, Color(0xFF1F55C6), CircleShape)
+                                    .height(50.dp),
+                                colors = CardDefaults.cardColors(Color(0xFF8CBAFF)),
+                                shape = CircleShape
+                            ) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+
+                                    ) {
+                                    Card(
+                                        modifier = Modifier
+                                            .width(120.dp)
+                                            .fillMaxHeight(),
+                                        colors = CardDefaults.cardColors(Color(0xFF2755B2)),
+                                        shape = RoundedCornerShape(
+                                            topStart = 16.dp,
+                                            bottomStart = 16.dp
+                                        )
+                                    ) {
+                                        Box(
+                                            modifier = Modifier.fillMaxSize(),
+                                            contentAlignment = Alignment.Center
+                                        ) {
+                                            Text(
+                                                text = "Nascimento",
+                                                fontSize = 16.sp,
+                                                color = Color.White,
+                                                fontWeight = FontWeight.Medium
+                                            )
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
+
+                        Button(
+                            onClick = { },
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .fillMaxWidth()
+                                .padding(16.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF213787))
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Center
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.historico),
+                                    contentDescription = null,
+                                    tint = Color.White,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text("Ver histórico de notas", color = Color.White)
+                            }
+                        }
+                    }
                 }
             }
+
+
+
         }
 
 
@@ -319,4 +530,10 @@ fun telaPerfil(controleNavegacao: NavHostController) {
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    telaPerfil(controleNavegacao = rememberNavController())
 }
