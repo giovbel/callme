@@ -18,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -166,16 +168,14 @@ fun telaPerfil(controleNavegacao: NavHostController) {
                         .padding(8.dp)
                         .size(60.dp)
                         .clip(CircleShape)
-                        .background(Color.LightGray) // Cor de fundo caso a imagem não carregue
+                        .background(Color.LightGray)
                 ) {
-                    // Carregando a imagem com Coil
                     Image(
                         painter = rememberImagePainter(
                             data = avatarUrls[index],
                             builder = {
-                                crossfade(true) // Animação de transição
-                              //  placeholder(R.drawable.placeholder_avatar) // Imagem de placeholder
-                             //   error(R.drawable.error_avatar) // Imagem caso ocorra erro
+                                crossfade(true)
+
                             }
                         ),
                         contentDescription = "Avatar $index",
@@ -185,29 +185,137 @@ fun telaPerfil(controleNavegacao: NavHostController) {
             }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////////
+        Card (
+            modifier = Modifier.fillMaxWidth().height(630.dp),
+            colors = CardDefaults.cardColors(Color (0xFFE3EFFF)),
+            shape = RectangleShape
+        ){
 
-        Spacer(modifier = Modifier.height(20.dp))
 
-        // Botão para ver histórico de notas
-        Button(
-            onClick = { /* Navegar para o histórico de notas */ },
+            Button(
+                onClick = {  },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF213787))
+            ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.historico),
+                        contentDescription = null,
+                        tint = Color.White,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Ver histórico de notas", color = Color.White)
+                }
+            }
+        }
+
+
+
+
+        Box(
             modifier = Modifier
+                .height(70.dp)
                 .fillMaxWidth()
-                .padding(16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF213787))
+                .background(
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFF213787),
+                            Color(0xFF245FB0),
+                            Color(0xFF6E96E8)
+                        )
+                    ),
+                )
         ) {
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.historico),
-                    contentDescription = null,
-                    tint = Color.White,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text("Ver histórico de notas", color = Color.White)
+                Button(
+                    onClick = {
+
+                    },
+                    modifier = Modifier
+                        .size(72.dp)
+                        .background(Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.calendarioicon),
+                        contentDescription = "",
+                        modifier = Modifier.size(60.dp)
+                    )
+
+                }
+                Button(
+                    onClick = {
+                        controleNavegacao.navigate("landingPageChat")
+                    },
+                    modifier = Modifier
+                        .size(72.dp)
+                        .background(Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.chaticon),
+                        contentDescription = "",
+                        modifier = Modifier.size(60.dp)
+                    )
+
+                }
+                Button(
+                    onClick = {controleNavegacao.navigate("telaDiario")
+                    },
+                    modifier = Modifier
+                        .size(72.dp)
+                        .background(Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.diarioicon),
+                        contentDescription = "",
+                        modifier = Modifier.size(60.dp)
+                    )
+
+                }
+                Button(
+                    onClick = {
+                        controleNavegacao.navigate("telaAutoajuda")
+                    },
+                    modifier = Modifier
+                        .size(72.dp)
+                        .background(Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.autoajuda),
+                        contentDescription = "",
+                        modifier = Modifier.size(60.dp)
+                    )
+
+                }
+                Button(
+                    onClick = { controleNavegacao.navigate("telaAutoajuda")
+                    },
+                    modifier = Modifier
+                        .size(72.dp)
+                        .background(Color.Transparent),
+                    colors = ButtonDefaults.buttonColors(Color.Transparent)
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.doacaoicon),
+                        contentDescription = "",
+                        modifier = Modifier.size(60.dp)
+                    )
+
+                }
             }
         }
     }
