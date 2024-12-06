@@ -1,6 +1,5 @@
 package br.senai.sp.jandira.callme.screens
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,12 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import br.senai.sp.jandira.callme.R
 import br.senai.sp.jandira.callme.model.NotasResponse
 import br.senai.sp.jandira.callme.model.Postagem
@@ -41,7 +38,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 @Composable
-fun telaNotas(controleNavegacao: NavHostController) {
+fun telaNotas(controleNavegacao: NavHostController, id: String) {
     var notas by remember { mutableStateOf<List<Postagem>>(emptyList()) }
     var currentNoteIndex by remember { mutableStateOf(0) }
     var loadingNotas by remember { mutableStateOf(true) }
@@ -364,7 +361,8 @@ fun telaNotas(controleNavegacao: NavHostController) {
 
                         }
                         Button(
-                            onClick = {controleNavegacao.navigate("telaDiario")
+                            onClick = {
+                                controleNavegacao.navigate("telaDiario/${id}")
                             },
                             modifier = Modifier
                                 .size(72.dp)

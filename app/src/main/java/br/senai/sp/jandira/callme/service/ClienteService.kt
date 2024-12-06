@@ -3,6 +3,7 @@ package br.senai.sp.jandira.callme.service
 import br.senai.sp.jandira.callme.model.Cliente
 import br.senai.sp.jandira.callme.model.ClienteResponse
 import br.senai.sp.jandira.callme.model.ResultAvatares
+import br.senai.sp.jandira.callme.model.diariolista
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -30,6 +31,7 @@ interface ClienteService {
 
     @GET("avatares")
     fun getAvatares(): Call<ResultAvatares>
-    }
+
+}
 
 

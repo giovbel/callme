@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import br.senai.jandira.sp.telacriarpostdiario.telaCriarPostDiario
 import br.senai.sp.jandira.callme.screens.landingPage
 import br.senai.sp.jandira.callme.screens.landingPageChat
@@ -25,6 +27,7 @@ import br.senai.sp.jandira.callme.screens.telaChatList
 import br.senai.sp.jandira.callme.screens.telaChatPsicologo
 import br.senai.sp.jandira.callme.screens.telaCriarNota
 import br.senai.sp.jandira.callme.screens.telaDiario
+import br.senai.sp.jandira.callme.screens.telaEditarpost
 import br.senai.sp.jandira.callme.screens.telaEscolherAvatar
 import br.senai.sp.jandira.callme.screens.telaLogin
 import br.senai.sp.jandira.callme.screens.telaNotas
@@ -57,13 +60,51 @@ class MainActivity : ComponentActivity() {
                         composable(route = "landingPageDois") { landingPageDois(controleNavegacao) }
                         composable(route = "landingPageChat") { landingPageChat(controleNavegacao) }
                         composable(route = "redefinirsenhacodigo") { redefinirSenhaCodigo(controleNavegacao) }
-                        composable(route = "telaNotas") { telaNotas(controleNavegacao) }
-                        composable(route = "telaDiario") { telaDiario(controleNavegacao) }
+
+
+                        composable(//FEITO
+                            "telaNotas/{id}",
+                            arguments = listOf(navArgument("id") {
+                                type = NavType.StringType
+                            })
+                        ) { backStackEntry ->
+                            val id =
+                                backStackEntry.arguments?.getString("id") ?: ""
+                            telaNotas(controleNavegacao, id = id)
+                        }
                         composable(route = "telaCategoria") { telaCategoria(controleNavegacao) }
-                        composable(route = "telaCriarPostDiario") {
-                                backStackEntry ->
-                            val id = backStackEntry.arguments?.getString("id")?.toIntOrNull() ?: 0
-                            telaCriarPostDiario(controleNavegacao, id.toString()) }
+
+                        composable(//FEITO
+                            "telaDiario/{id}",
+                            arguments = listOf(navArgument("id") {
+                                type = NavType.StringType
+                            })
+                        ) { backStackEntry ->
+                            val id =
+                                backStackEntry.arguments?.getString("id") ?: ""
+                            telaDiario(controleNavegacao, id = id)
+                        }
+                        composable(//FEITO
+                            "telaCriarPostDiario/{id}",
+                            arguments = listOf(navArgument("id") {
+                                type = NavType.StringType
+                            })
+                        ) { backStackEntry ->
+                            val id =
+                                backStackEntry.arguments?.getString("id") ?: ""
+                            telaCriarPostDiario(controleNavegacao, id = id)
+                        }
+                        composable(//FEITO
+                            "telaEditarpost/{id}",
+                            arguments = listOf(navArgument("id") {
+                                type = NavType.StringType
+                            })
+                        ) { backStackEntry ->
+                            val id =
+                                backStackEntry.arguments?.getString("id") ?: ""
+                            telaEditarpost(controleNavegacao, id = id)
+                        }
+
                         composable(route = "telaChatList") { telaChatList(controleNavegacao) }
                         composable(route = "telaCriarNota") { telaCriarNota(controleNavegacao) }
                         composable(route = "telaEscolherAvatar") { telaEscolherAvatar(controleNavegacao) }
@@ -73,6 +114,7 @@ class MainActivity : ComponentActivity() {
                         composable(route = "telaAutoajuda") { telaAutojuda(controleNavegacao) }
                         composable(route = "telaCardAutoAjuda") { telaCardAutoAjuda(controleNavegacao) }
                         composable(route = "telaChatConversa") {telaChatConversa(controleNavegacao)}
+                        composable(route = "telaDiario") { telaDiario(controleNavegacao, id.toString()) }
 //                        composable(route = "DetalhesPersonagem/{id}"){ backStackEntry -> val id = backStackEntry.arguments?.getString("id")CharacterDetails(controleNavegacao, id)
                         }
                     }

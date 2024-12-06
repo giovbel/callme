@@ -7,3 +7,5 @@ data class Diario(
     val classificacao: Int=1,
     val idUsuario: Int=1
 )
+
+

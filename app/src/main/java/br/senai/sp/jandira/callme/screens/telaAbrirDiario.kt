@@ -1,7 +1,5 @@
-package br.senai.jandira.sp.telacriarpostdiario
-
+package br.senai.sp.jandira.callme.screens
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -65,7 +63,7 @@ import java.util.Locale
 
 
 @Composable
-fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
+fun telaEditarpost(controleNavegacao: NavHostController,id:String) {
 
     var conteudo by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("Título") }
@@ -110,7 +108,7 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                         .width(60.dp)
                 )
                 Text(
-                    text = "CRIAR PÁGINA",
+                    text = "EDITAR PÁGINA",
                     fontSize = 20.sp,
                     color = Color.White,
                     fontWeight = FontWeight.Medium
@@ -141,33 +139,21 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(10.dp),
+                        .padding(20.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    TextField(
-                        value = if (isFocused && title == "Título") "" else title,
-                        onValueChange = { title = it },
-                        textStyle = LocalTextStyle.current.copy(
+                    Text(
+                        text = if (isFocused && title == "Título") "" else title, // Controla o conteúdo exibido
+                        style = LocalTextStyle.current.copy(
                             fontSize = 25.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         ),
                         modifier = Modifier
-                            .weight(1f)
-                            .onFocusChanged { focusState ->
-                                isFocused = focusState.isFocused
-                            },
-                        singleLine = true,
-                        colors = TextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            disabledContainerColor = Color.Transparent,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            errorContainerColor = Color.Transparent
-                        )
+                            .weight(1f) // Ajusta o peso dentro de um layout flexível
                     )
+
 
 
                     Text(
@@ -191,25 +177,17 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                             .height(300.dp),
                         colors = CardDefaults.cardColors(Color(0xFFE4EFFF)),
                     ) {
-                        BasicTextField(
-                            value = conteudo,
-                            onValueChange = { novoValor ->
-                                conteudo = novoValor
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .background(Color.Transparent)
-                                .padding(16.dp),
-                            decorationBox = { innerTextField ->
-                                if (conteudo.isEmpty()) {
-                                    Text(
-                                        "Cada página em branco é uma oportunidade de se expressar. Vamos começar?",
-                                        color = Color.Gray
-                                    )
-                                }
-                                innerTextField()
-                            }
-                        )
+                        Column (
+                            modifier = Modifier.padding(12.dp)
+                        ){
+                            Text(
+                                "Cada página em branco é uma oportunidade de se expressar. Vamos começar?",
+                                color = Color(0xFF2754B2)
+                            )
+                        }
+
+
+
                     }
 
                     Column (
@@ -330,18 +308,14 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                                         .height(60.dp)
                                         .fillMaxWidth()
                                         .align(Alignment.CenterHorizontally)
-                                        .padding(start = 12.dp, end = 12.dp, bottom = 10.dp)
-                                        .clickable {
-                                            RetrofitFactory.getDiarioService().addDiario(
-                                                diario = Diario(titulo = title, conteudo = conteudo, dataPublicacao = currentDate, classificacao = 0, idUsuario = id.toInt())
-                                            )
-                                                .enqueue(object : Callback<diarioResponse>{
+                                        .padding(start = 12.dp, end = 12.dp, bottom = 10.dp).clickable { selectedImage?.let { Diario(titulo = title, conteudo = conteudo, dataPublicacao = currentDate, classificacao = it.toInt(), idUsuario =
+                                        id.toInt())}
+                                            ?.let { RetrofitFactory.getDiarioService().addDiario(diario = it).enqueue(object : Callback<diarioResponse>{
                                                 override fun onResponse(
                                                     p0: Call<diarioResponse>,
                                                     p1: Response<diarioResponse>
                                                 ) {
-                                                    Log.i("tag", p1.body().toString())
-                                                    controleNavegacao.navigate("telaDiario/${id}")
+                                                    controleNavegacao.navigate("telaDiario")
 
                                                 }
 
@@ -349,10 +323,9 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                                                     p0: Call<diarioResponse>,
                                                     p1: Throwable
                                                 ) {
-                                                    Log.i("tag", p1.toString())
 
                                                 }
-                                            }) } ,
+                                            }) } },
                                     colors = CardDefaults.cardColors(Color(0xFF1F55C6)),
                                     shape = RoundedCornerShape(6.dp),
                                 ){
@@ -371,13 +344,13 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
                                     }
 
                                 }
-                        }
+                            }
                         }
 
 
 
                     }
-                    
+
                 }
 
 
@@ -493,4 +466,3 @@ fun telaCriarPostDiario(controleNavegacao: NavHostController, id : String) {
         }
     }
 }
-
