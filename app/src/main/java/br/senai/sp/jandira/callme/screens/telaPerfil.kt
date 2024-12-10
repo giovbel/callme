@@ -434,7 +434,7 @@ fun telaPerfil(controleNavegacao: NavHostController) {
                                     modifier = Modifier.size(20.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text("Ver histórico de notas", color = Color.White)
+                                Text("Sair da conta", color = Color.White)
                             }
                         }
                     }
