@@ -64,7 +64,7 @@ import java.util.Locale
 
 
 @Composable
-fun telaEditarpost(controleNavegacao: NavHostController) {
+fun telaEditarpost(controleNavegacao: NavHostController, id : String) {
 
     var conteudo by remember { mutableStateOf("") }
     var title by remember { mutableStateOf("Título") }

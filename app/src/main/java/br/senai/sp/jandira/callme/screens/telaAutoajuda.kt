@@ -51,7 +51,7 @@ import br.senai.sp.jandira.callme.R
 
 
 @Composable
-fun telaAutojuda(controleNavegacao: NavHostController) {
+fun telaAutojuda(controleNavegacao: NavHostController, id: String) {
 
     var conteudo by remember { mutableStateOf("") }
 
@@ -182,7 +182,7 @@ fun telaAutojuda(controleNavegacao: NavHostController) {
                             .border(2.dp, Color(0xFF6188C5), RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Color(0xFFAECAE6)),
                     ){
-                        Image(painter = painterResource(id = R.drawable.ansiedade), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight().clickable { controleNavegacao.navigate("telaCardAutoAjuda")}, contentScale = ContentScale.Crop)
+                        Image(painter = painterResource(id = R.drawable.ansiedade), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight().clickable { controleNavegacao.navigate("telaCardAutoAjuda/${id}")}, contentScale = ContentScale.Crop)
                     }
                     Column (
 

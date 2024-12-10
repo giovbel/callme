@@ -242,7 +242,7 @@ fun telaCriarNota(controleNavegacao: NavHostController) {
                                                     "Nota adicionada com sucesso!",
                                                     Toast.LENGTH_SHORT
                                                 ).show()
-                                                controleNavegacao.navigate("telaNotas")
+                                                controleNavegacao.navigate("telaNotas/{id")
                                             } else {
                                                 Toast.makeText(
                                                     context,

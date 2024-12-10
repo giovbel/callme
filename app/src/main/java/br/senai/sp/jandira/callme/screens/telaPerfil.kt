@@ -12,8 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -40,6 +43,7 @@ import retrofit2.Response
 fun telaPerfil(controleNavegacao: NavHostController) {
     // Lista de URLs dos avatares (usando mutableStateListOf)
     val avatarUrls = remember { mutableStateListOf<String>() }
+    var nomeState by remember { mutableStateOf("") }
 
     LaunchedEffect(Unit) {
         RetrofitFactory.getClienteService().getAvatares().enqueue(object : Callback<ResultAvatares> {
@@ -139,7 +143,7 @@ fun telaPerfil(controleNavegacao: NavHostController) {
                     shape = CircleShape
                 ) {
                     Image(
-                        painter = painterResource(id = R.drawable.perfilcomum),
+                        painter = painterResource(id = R.drawable.quatro),
                         contentDescription = "",
                         modifier = Modifier.fillMaxSize()
                     )
@@ -302,7 +306,10 @@ fun telaPerfil(controleNavegacao: NavHostController) {
                                         )
                                     ) {
                                         Box(
-                                            modifier = Modifier.fillMaxSize(),
+                                            modifier = Modifier
+                                                .fillMaxSize()
+                                            ,
+
                                             contentAlignment = Alignment.Center
                                         ) {
                                             Text(
@@ -349,7 +356,18 @@ fun telaPerfil(controleNavegacao: NavHostController) {
                                                 color = Color.White,
                                                 fontWeight = FontWeight.Medium
                                             )
+
+//                                            OutlinedTextField(
+//                                                value = nomeState,
+//                                                onValueChange ={ nomeState = it},
+//                                                colors = OutlinedTextFieldDefaults.colors(
+//                                                    unfocusedBorderColor = Color.Transparent,
+//                                                    focusedBorderColor = Color.Transparent
+//                                                ),
+//                                                modifier = Modifier.fillMaxWidth()
+//                                            )
                                         }
+
 
                                     }
                                 }

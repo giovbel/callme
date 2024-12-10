@@ -30,7 +30,6 @@ import br.senai.sp.jandira.callme.service.RetrofitFactory
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 @Composable
 fun telaDiario(controleNavegacao: NavHostController, id: String) {
     var dadosState by remember { mutableStateOf(diariolista()) }

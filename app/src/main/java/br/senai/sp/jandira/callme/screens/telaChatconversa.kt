@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.callme.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +37,7 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 @Composable
-fun telaChatConversa(controleNavegacao: NavHostController) {
+fun telaChatConversa(controleNavegacao: NavHostController, id: String) {
 
     var conteudo by remember { mutableStateOf("") }
 
@@ -87,7 +89,7 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
                 ) {
-
+                    Image(painter = painterResource(id = R.drawable.quatro), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                 }
             }
         }
@@ -124,10 +126,11 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                             .border(2.dp, Color(0xFF0C3386), RoundedCornerShape(30.dp)),
                         shape = RoundedCornerShape(100.dp),
                     ) {
+                        Image(painter = painterResource(id = R.drawable.profissaanorexia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                     }
                     Column {
                         Text(
-                            text = "Giovanna Belo",
+                            text = "Clarice Rodrigues",
                             fontSize = 20.sp,
                             color = Color(0xFF2754B2),
                             fontWeight = FontWeight.Bold
@@ -211,12 +214,17 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                                 .size(40.dp),
                             shape = RoundedCornerShape(100.dp),
                         ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.quatro),
+                                contentDescription = "arroz",
+                                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                                contentScale = ContentScale.Crop
+                            )
                         }
-
                         Spacer(modifier = Modifier.width(8.dp))
 
                         Text(
-                            text = "A vida é muito triste",
+                            text = "Melhorei, me ajudou bastante",
                             fontSize = 14.sp,
                             color = Color.White,
                             fontWeight = FontWeight.Bold
@@ -245,12 +253,13 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                                     .size(40.dp),
                                 shape = RoundedCornerShape(100.dp),
                             ) {
+                                Image(painter = painterResource(id = R.drawable.profissaanorexia), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
                             }
 
                             Spacer(modifier = Modifier.width(8.dp))
 
                             Text(
-                                text = "ata",
+                                text = "Que bom, Estou aqui para isso!",
                                 fontSize = 14.sp,
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold
@@ -327,11 +336,10 @@ fun telaChatConversa(controleNavegacao: NavHostController) {
                             contentDescription = "Enviar mensagem",
                             modifier = Modifier
                                 .size(40.dp)
+                                .clickable { Log.i("salve", "aa")
+                                    controleNavegacao.navigate("telaChatConversaDois/${id}")}
                                 .padding(8.dp)
-                                .clickable {
-                                    println("Mensagem enviada: $conteudo")
-                                    conteudo = ""
-                                }
+
                         )
                     }
                 }

@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -270,7 +271,9 @@ fun telaChatPsicologo(controleNavegacao: NavHostController) {
                                     fontSize = 16.sp,
                                     color = Color.White,
                                     fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.padding(start = 12.dp, top = (6.dp))
+                                    modifier = Modifier
+                                        .clickable { controleNavegacao.navigate("telaPsicologoInfo") }
+                                        .padding(start = 12.dp, top = (6.dp))
                                 )
                                     }
                             }

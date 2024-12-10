@@ -1,34 +1,23 @@
 package br.senai.sp.jandira.callme.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -37,9 +26,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
-
 @Composable
-fun telaEscolherAvatar(navController: NavHostController) {
+fun telaEscolherAvatar(controleNavegacao: NavHostController, id: String) {
+    // Estado para armazenar o avatar selecionado
+    var selectedAvatar by remember { mutableStateOf<Int?>(null) }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -55,18 +46,11 @@ fun telaEscolherAvatar(navController: NavHostController) {
         Column(
             verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(93.dp)
-                    .padding(top = 16.dp),
-                alignment = Alignment.Center
-            )
             Spacer(modifier = Modifier.height(50.dp))
             Column(
-                modifier = Modifier.fillMaxWidth().height(350.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(350.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -76,7 +60,7 @@ fun telaEscolherAvatar(navController: NavHostController) {
                     color = Color(0xFF04276D),
                     fontWeight = FontWeight.Medium
                 )
-                Spacer(modifier = Modifier.height(70.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 Card(
                     modifier = Modifier
                         .height(170.dp)
@@ -88,136 +72,171 @@ fun telaEscolherAvatar(navController: NavHostController) {
                         ),
                     shape = RoundedCornerShape(100.dp)
                 ) {
+                    selectedAvatar?.let {
+                        Image(
+                            painter = painterResource(id = it),
+                            contentDescription = "Avatar Selecionado",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
-
             }
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .fillMaxHeight()
+                    .weight(1f)
                     .background(Color(0xFFE7ECF8))
             ) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(320.dp)
                         .padding(top = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp),
+                    contentPadding = PaddingValues(bottom = 80.dp)
                 ) {
                     item {
+                        // Primeira linha de avatares
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally),
-
+                            horizontalArrangement = Arrangement.spacedBy(
+                                16.dp,
+                                Alignment.CenterHorizontally
+                            ),
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
+                            listOf(
+                                R.drawable.avataraaa,
+                                R.drawable.avatar,
+                                R.drawable.avataraa
+                            ).forEach { avatarId ->
+                                Card(
+                                    modifier = Modifier
+                                        .height(120.dp)
+                                        .width(120.dp)
+                                        .clickable {
+                                            selectedAvatar = avatarId
+                                        },
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = avatarId),
+                                        contentDescription = "Avatar",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(8.dp))
 
+                        // Segunda linha de avatares
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                            horizontalArrangement = Arrangement.spacedBy(
+                                16.dp,
+                                Alignment.CenterHorizontally
+                            )
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
+                            listOf(
+                                R.drawable.cinco,
+                                R.drawable.um,
+                                R.drawable.dois
+                            ).forEach { avatarId ->
+                                Card(
+                                    modifier = Modifier
+                                        .height(120.dp)
+                                        .width(120.dp)
+                                        .clickable {
+                                            selectedAvatar = avatarId
+                                        },
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = avatarId),
+                                        contentDescription = "Avatar",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
+                            }
                         }
 
                         Spacer(modifier = Modifier.height(8.dp))
 
+                        // Terceira linha de avatares
                         Row(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                            horizontalArrangement = Arrangement.spacedBy(
+                                16.dp,
+                                Alignment.CenterHorizontally
+                            )
                         ) {
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
-                            Card(
-                                modifier = Modifier
-                                    .height(120.dp)
-                                    .width(120.dp),
-                                colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
-                            ) {}
+                            listOf(
+                                R.drawable.tres,
+                                R.drawable.quatro,
+                                R.drawable.avataraaaaaa
+                            ).forEach { avatarId ->
+                                Card(
+                                    modifier = Modifier
+                                        .height(120.dp)
+                                        .width(120.dp)
+                                        .clickable {
+                                            selectedAvatar = avatarId
+                                        },
+                                    colors = CardDefaults.cardColors(containerColor = Color(0xFFB3C8E7))
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = avatarId),
+                                        contentDescription = "Avatar",
+                                        modifier = Modifier.fillMaxSize(),
+                                        contentScale = ContentScale.Crop
+                                    )
+                                }
+                            }
                         }
                     }
-                    }
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ){
-                    Row (
-                        modifier = Modifier
-                            .height(50.dp)
-                            .width(200.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .align(Alignment.Center)
-                            .background(Color(0xFFBBD1FF)),
-                        horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.CenterVertically
-                    ){
-                        Text(
-                            textAlign = TextAlign.Center,
-                            text = "Finalizar",
-                            fontSize = 19.sp,
-                            color = Color(0xFF04276D),
-                            fontWeight = FontWeight.Medium
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.finalizar),
-                            contentDescription = "",
-                            modifier = Modifier
-                                .width(20.dp)
-                                .height(20.dp)
-                        )
-                    }
-
                 }
             }
 
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .background(Color(0xFFBBD1FF)),
+                contentAlignment = Alignment.Center
+            ) {
+                Row(
+                    modifier = Modifier
+                        .height(50.dp)
+                        .width(200.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(Color(0xFF658EC7)),
+                    horizontalArrangement = Arrangement.SpaceEvenly,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        textAlign = TextAlign.Center,
+                        text = "Finalizar",
+                        fontSize = 19.sp,
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.finalizar),
+                        contentDescription = "Finalizar",
+                        modifier = Modifier
+                            .width(20.dp)
+                            .height(20.dp)
+                            .clickable {
+                                controleNavegacao.navigate("telaNotas/${id}")
+                            }
+                    )
+
+                }
+            }
         }
     }
 }

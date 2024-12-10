@@ -26,7 +26,7 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 @Composable
-fun telaChatList(controleNavegacao: NavHostController) {
+fun telaChatList(controleNavegacao: NavHostController, id: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -145,7 +145,7 @@ fun telaChatList(controleNavegacao: NavHostController) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Card(
-                        onClick = {controleNavegacao.navigate("telaChatConversa")},
+                        onClick = {controleNavegacao.navigate("telaChatConversa/${id}")},
                         modifier = Modifier
                             .height(80.dp)
                             .width(80.dp)

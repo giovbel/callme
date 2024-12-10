@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.callme.screens
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -121,7 +122,9 @@ fun telaNotas(controleNavegacao: NavHostController, id: String) {
                         .size(50.dp)
                         .border(4.dp, Color(0xFF9DBFEF), RoundedCornerShape(30.dp)),
                     shape = RoundedCornerShape(100.dp),
-                ) {}
+                ) {
+                    Image(painter = painterResource(id = R.drawable.quatro), contentDescription = "arroz", modifier = Modifier.fillMaxWidth().fillMaxHeight(), contentScale = ContentScale.Crop)
+                }
             }
         }
 
@@ -330,7 +333,7 @@ fun telaNotas(controleNavegacao: NavHostController, id: String) {
                     ) {
                         Button(
                             onClick = {
-
+                                controleNavegacao.navigate("telaNotas/${id}")
                             },
                             modifier = Modifier
                                 .size(72.dp)
@@ -346,7 +349,7 @@ fun telaNotas(controleNavegacao: NavHostController, id: String) {
                         }
                         Button(
                             onClick = {
-                               controleNavegacao.navigate("landingPageChat")
+                               controleNavegacao.navigate("landingPageChat/${id}")
                             },
                             modifier = Modifier
                                 .size(72.dp)
@@ -378,7 +381,7 @@ fun telaNotas(controleNavegacao: NavHostController, id: String) {
                         }
                         Button(
                             onClick = {
-                              controleNavegacao.navigate("telaAutoajuda")
+                              controleNavegacao.navigate("telaAutojuda/${id}")
                             },
                             modifier = Modifier
                                 .size(72.dp)
@@ -393,7 +396,7 @@ fun telaNotas(controleNavegacao: NavHostController, id: String) {
 
                         }
                         Button(
-                            onClick = { controleNavegacao.navigate("telaAutoajuda")
+                            onClick = { controleNavegacao.navigate("telaAutojuda/${id}")
                             },
                             modifier = Modifier
                                 .size(72.dp)

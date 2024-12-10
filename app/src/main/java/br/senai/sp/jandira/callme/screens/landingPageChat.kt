@@ -25,14 +25,14 @@ import androidx.navigation.NavHostController
 import br.senai.sp.jandira.callme.R
 
 @Composable
-fun landingPageChat(controleNavegacao: NavHostController) {
+fun landingPageChat(controleNavegacao: NavHostController, id: String) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Box(
             modifier = Modifier
-                .clickable { controleNavegacao.navigate("telaChatList") }
+                .clickable { controleNavegacao.navigate("telaChatList/${id}") }
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
@@ -99,7 +99,7 @@ fun landingPageChat(controleNavegacao: NavHostController) {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(
-                        onClick = {controleNavegacao.navigate("telaChatList")},
+                        onClick = {controleNavegacao.navigate("telaChatList/${id}")},
                         modifier = Modifier.background(Color.Transparent),
                         colors = ButtonDefaults.buttonColors(Color.Transparent)
                     ) {
